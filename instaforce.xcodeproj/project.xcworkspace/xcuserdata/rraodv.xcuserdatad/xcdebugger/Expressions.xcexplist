@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[FilterViewController prepareForSegue:sender:]:FilterViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.modifiedImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FilterViewController tableView:didSelectRowAtIndexPath:]:FilterViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.yourItemsArray[(int)indexPath.row]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FilterViewController viewWillAppear:]:FilterViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.modifiedImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
