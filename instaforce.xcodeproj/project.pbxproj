@@ -195,6 +195,9 @@
 		2E9BCA5418A8B77800D61B0B /* GPUImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BCA5018A8B77700D61B0B /* GPUImageView.m */; };
 		2E9BCB9718A91A8700D61B0B /* SubmitPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BCB9618A91A8700D61B0B /* SubmitPostViewController.m */; };
 		2E9BCB9A18A921AC00D61B0B /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BCB9918A921AC00D61B0B /* TPKeyboardAvoidingScrollView.m */; };
+		2E9BCB9C18A9A00C00D61B0B /* View1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9BCB9B18A99B4400D61B0B /* View1.xib */; };
+		2E9BCB9F18A9A39000D61B0B /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BCB9E18A9A39000D61B0B /* CustomTableViewCell.m */; };
+		2E9BCBA118A9A86F00D61B0B /* CustomCellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9BCBA018A9A86F00D61B0B /* CustomCellXIB.xib */; };
 		4F3F413517E7CA5C008B3283 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3F413417E7CA5C008B3283 /* ImageIO.framework */; };
 		824A9DD91724E16400C9BD79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DD81724E16400C9BD79 /* UIKit.framework */; };
 		824A9DDB1724E16400C9BD79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DDA1724E16400C9BD79 /* Foundation.framework */; };
@@ -599,7 +602,10 @@
 		2E9BCB9618A91A8700D61B0B /* SubmitPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitPostViewController.m; sourceTree = "<group>"; };
 		2E9BCB9818A921AC00D61B0B /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		2E9BCB9918A921AC00D61B0B /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
-		2E9BCB9B18A99B4400D61B0B /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		2E9BCB9B18A99B4400D61B0B /* View1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View1.xib; sourceTree = "<group>"; };
+		2E9BCB9D18A9A39000D61B0B /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		2E9BCB9E18A9A39000D61B0B /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		2E9BCBA018A9A86F00D61B0B /* CustomCellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellXIB.xib; sourceTree = "<group>"; };
 		4F3F413417E7CA5C008B3283 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		824A9DD51724E16400C9BD79 /* instaforce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instaforce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		824A9DD81724E16400C9BD79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1037,7 +1043,6 @@
 		824A9DCC1724E16400C9BD79 = {
 			isa = PBXGroup;
 			children = (
-				2E9BCB9B18A99B4400D61B0B /* View.xib */,
 				2E9BCA4D18A8B77700D61B0B /* GPUImageContext.m */,
 				2E9BCA4E18A8B77700D61B0B /* GPUImageMovieWriter.m */,
 				2E9BCA4F18A8B77700D61B0B /* GPUImagePicture.m */,
@@ -1201,6 +1206,8 @@
 				2E9BC90618A8691800D61B0B /* GPUImage.xcodeproj */,
 				2E9BC65618A733AE00D61B0B /* fdata.json */,
 				2E9BC43F18A6F96200D61B0B /* data.json */,
+				2E9BCB9B18A99B4400D61B0B /* View1.xib */,
+				2E9BCBA018A9A86F00D61B0B /* CustomCellXIB.xib */,
 				2E9BC42D18A4F6D600D61B0B /* MainStoryboard.storyboard */,
 				2E9BC43518A5359C00D61B0B /* images */,
 				824A9DDE1724E16400C9BD79 /* instaforce */,
@@ -1266,6 +1273,8 @@
 		824A9E301724E2A900C9BD79 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2E9BCB9D18A9A39000D61B0B /* CustomTableViewCell.h */,
+				2E9BCB9E18A9A39000D61B0B /* CustomTableViewCell.m */,
 				2E9BCB9818A921AC00D61B0B /* TPKeyboardAvoidingScrollView.h */,
 				2E9BCB9918A921AC00D61B0B /* TPKeyboardAvoidingScrollView.m */,
 				824A9E311724E2A900C9BD79 /* AppDelegate.h */,
@@ -1398,6 +1407,7 @@
 				824A9DE31724E16400C9BD79 /* InfoPlist.strings in Resources */,
 				2E9BC43018A4FCB000D61B0B /* slr_camera-32.png in Resources */,
 				824A9E3F1724EC6300C9BD79 /* Settings.bundle in Resources */,
+				2E9BCBA118A9A86F00D61B0B /* CustomCellXIB.xib in Resources */,
 				824A9E411724ECC600C9BD79 /* SalesforceSDKResources.bundle in Resources */,
 				824A9E5F1724F02D00C9BD79 /* icon-72.png in Resources */,
 				824A9E601724F02D00C9BD79 /* icon-72@2x.png in Resources */,
@@ -1406,6 +1416,7 @@
 				2E9BC74218A73D7900D61B0B /* LICENSE in Resources */,
 				2E9BC73B18A73D7900D61B0B /* commit.txt in Resources */,
 				824A9E611724F02D00C9BD79 /* icon.png in Resources */,
+				2E9BCB9C18A9A00C00D61B0B /* View1.xib in Resources */,
 				824A9E621724F02D00C9BD79 /* icon@2x.png in Resources */,
 				824A9E6A1724F03D00C9BD79 /* Default-568h@2x.png in Resources */,
 				2E9BC44018A6F96200D61B0B /* data.json in Resources */,
@@ -1597,6 +1608,7 @@
 				2E9BC43B18A573B400D61B0B /* FeedsViewController.m in Sources */,
 				2E9BC91418A89DA000D61B0B /* FilterViewController.m in Sources */,
 				824A9E361724E45100C9BD79 /* RootViewController.m in Sources */,
+				2E9BCB9F18A9A39000D61B0B /* CustomTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

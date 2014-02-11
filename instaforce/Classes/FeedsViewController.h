@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SFRestAPI.h"
+#import "CustomTableViewCell.h"
 
 @interface FeedsViewController : UITableViewController<SFRestDelegate> {
 

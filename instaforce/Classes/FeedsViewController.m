@@ -11,6 +11,7 @@
 #import "SFRestAPI+Files.h"
 #import "SFRestRequest.h"
 
+
 #import <SalesforceSDKCore/SFAuthenticationManager.h>
 #import <SalesforceNativeSDK/SFRestAPI+Blocks.h>
 #import <SalesforceNativeSDK/SFRestAPI+Files.h>
@@ -71,12 +72,33 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 
 
 #pragma mark - View lifecycle
-- (void)loadView {
-    [super loadView];
+
+- (void) viewDidLoad {
     self.thumbnailCache = [NSMutableDictionary dictionary];
-   // self.title = @"FileExplorer";
-    [self showOwnedFiles];
+    // self.title = @"FileExplorer";
+  
+    //register main table view's xib file
+    [self.tableView registerNib:[UINib nibWithNibName:@"CustomCellXIB"
+                                               bundle:[NSBundle mainBundle]]
+         forCellReuseIdentifier:@"customTableCellSBID"];
 }
+
+- (void) viewWillAppear:(BOOL)animated  {
+    [super viewWillAppear:animated];
+    //register main table view's xib file
+    [self.tableView registerNib:[UINib nibWithNibName:@"CustomCellXIB"
+                                               bundle:[NSBundle mainBundle]]
+         forCellReuseIdentifier:@"customTableCellSBID"];
+    
+      [self showOwnedFiles];
+}
+
+//- (void)loadView {
+//    [super loadView];
+//    self.thumbnailCache = [NSMutableDictionary dictionary];
+//   // self.title = @"FileExplorer";
+//    [self showOwnedFiles];
+//}
 
 #pragma mark - Button handlers
 
@@ -149,15 +171,16 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
     // cache miss
     else {
         [self downloadThumbnail:fileId completeBlock:^(UIImage *image) {
-            // size it
-            UIGraphicsBeginImageContext(CGSizeMake(720,480));
-            [image drawInRect:CGRectMake(0, 0, image.size.width, 480)];
-            UIImage *thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
+//            // size it
+//            UIGraphicsBeginImageContext(CGSizeMake(720,480));
+//            [image drawInRect:CGRectMake(0, 0, image.size.width, 480)];
+//            UIImage *thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
+//            UIGraphicsEndImageContext();
             // cache it
-            self.thumbnailCache[fileId] = thumbnailImage;
+           // self.thumbnailCache[fileId] = thumbnailImage;
             // done
-            completeBlock(thumbnailImage);
+           // completeBlock(thumbnailImage);
+            completeBlock(image);
         }];
     }
 }
@@ -188,12 +211,12 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView_ cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"CellIdentifier";
+    static NSString *CellIdentifier = @"customTableCellSBID";
     
     // Dequeue or create a cell of the appropriate type.
-    UITableViewCell *cell = [tableView_ dequeueReusableCellWithIdentifier:CellIdentifier];
+    CustomTableViewCell *cell = [tableView_ dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
 	// Configure the cell to show the data.
@@ -201,13 +224,16 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
     NSString *fileId = obj[@"id"];
     NSInteger tag = [fileId hash];
     
-	cell.textLabel.text =  obj[@"title"];
-    cell.detailTextLabel.text = obj[@"owner"][@"name"];
+//	cell.textLabel.text =  obj[@"title"];
+//    cell.detailTextLabel.text = obj[@"owner"][@"name"];
     cell.tag = tag;
     [self getThumbnail:fileId completeBlock:^(UIImage* thumbnailImage) {
         // Cell are recycled - we don't want to set the image if the cell is showing a different file
         if (cell.tag == tag) {
-            cell.imageView.image = thumbnailImage;
+            //cell.imageView.image = thumbnailImage;
+            cell.fileName.text = obj[@"title"];
+            cell.ownerName.text = obj[@"owner"][@"name"];
+            cell.myImageView.image = thumbnailImage;
             [cell setNeedsLayout];
         }
     }];
@@ -216,10 +242,5 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
     
 }
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 90;
-}
 
 @end
