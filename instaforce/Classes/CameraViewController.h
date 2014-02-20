@@ -12,6 +12,7 @@
 
 
 
+
 @interface CameraViewController : UITableViewController <SFRestDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;

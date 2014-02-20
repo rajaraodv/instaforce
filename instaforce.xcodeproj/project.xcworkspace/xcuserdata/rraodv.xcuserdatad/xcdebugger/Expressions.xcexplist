@@ -3,26 +3,57 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[FilterViewController prepareForSegue:sender:]:FilterViewController.m">
+         contextName = "-[FeedItem initWithJsonObj:]:FeedItem.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.modifiedImage">
+               value = "[SFRestAPI sharedInstance].coordinator.credentials">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FilterViewController tableView:didSelectRowAtIndexPath:]:FilterViewController.m">
+         contextName = "-[FeedsViewController tableView:cellForRowAtIndexPath:]:FeedsViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.yourItemsArray[(int)indexPath.row]">
+               value = "att == [NSNull null]">
+            </PersistentString>
+            <PersistentString
+               value = "att == nil">
+            </PersistentString>
+            <PersistentString
+               value = "feedItem._raw">
+            </PersistentString>
+            <PersistentString
+               value = "feedItem[@&quot;attachment&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FilterViewController viewWillAppear:]:FilterViewController.m">
+         contextName = "-[FeedsViewController loadImageForFeedItem:forIndexPath:]:FeedsViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.modifiedImage">
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FeedsViewController startIconDownload:forIndexPath:]:FeedsViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[FeedsViewController request:didLoadResponse:]:FeedsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "feedItem.attachmentId">
+            </PersistentString>
+            <PersistentString
+               value = "feedItem.ownerImageUrl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FeedsViewController tableView:numberOfRowsInSection:]:FeedsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self.feedItems count]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

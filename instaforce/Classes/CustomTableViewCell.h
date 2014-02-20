@@ -12,8 +12,11 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *myImageView;
 
-@property (strong, nonatomic) IBOutlet UILabel *ownerName;
+@property (strong, nonatomic) IBOutlet UILabel *likesCount;
 
-@property (strong, nonatomic) IBOutlet UILabel *fileName;
+@property (strong, nonatomic) IBOutlet UILabel *Owner;
+
+@property (strong, nonatomic) IBOutlet UIImageView *ownerImageView;
+
 
 @end

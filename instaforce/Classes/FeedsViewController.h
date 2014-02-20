@@ -16,7 +16,7 @@
     IBOutlet UITableView *tableView;
 
 }
-
-@property (nonatomic, strong) NSArray *dataRows;
+@property (nonatomic, strong) NSString *token;
+@property (nonatomic, strong) NSMutableArray *feedItems;
 
 @end
