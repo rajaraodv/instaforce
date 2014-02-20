@@ -219,7 +219,6 @@
 		824A9DE31724E16400C9BD79 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 824A9DE11724E16400C9BD79 /* InfoPlist.strings */; };
 		824A9DE51724E16400C9BD79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 824A9DE41724E16400C9BD79 /* main.m */; };
 		824A9E331724E2A900C9BD79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 824A9E321724E2A900C9BD79 /* AppDelegate.m */; };
-		824A9E361724E45100C9BD79 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824A9E351724E45100C9BD79 /* RootViewController.m */; };
 		824A9E3F1724EC6300C9BD79 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 824A9E3E1724EC6300C9BD79 /* Settings.bundle */; };
 		824A9E411724ECC600C9BD79 /* SalesforceSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 824A9E401724ECC600C9BD79 /* SalesforceSDKResources.bundle */; };
 		824A9FE81725098F00C9BD79 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9FE71725098F00C9BD79 /* libxml2.dylib */; };
@@ -758,7 +757,6 @@
 		2E9BCB9D18A9A39000D61B0B /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		2E9BCB9E18A9A39000D61B0B /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		2E9BCBA018A9A86F00D61B0B /* CustomCellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellXIB.xib; sourceTree = "<group>"; };
-		2E9BCBA218AA89EF00D61B0B /* hearts-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hearts-50.png"; sourceTree = "<group>"; };
 		2EA3DD0318B3CBDF00DA31A5 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
 		2EA3DD0418B3CBDF00DA31A5 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 		2EA3DD0518B3CBDF00DA31A5 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
@@ -774,14 +772,8 @@
 		824A9DE61724E16400C9BD79 /* instaforce-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "instaforce-Prefix.pch"; sourceTree = "<group>"; };
 		824A9E311724E2A900C9BD79 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		824A9E321724E2A900C9BD79 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		824A9E341724E45000C9BD79 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		824A9E351724E45100C9BD79 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		824A9E3E1724EC6300C9BD79 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		824A9E401724ECC600C9BD79 /* SalesforceSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SalesforceSDKResources.bundle; sourceTree = "<group>"; };
-		824A9E5B1724F02D00C9BD79 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
-		824A9E5C1724F02D00C9BD79 /* icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72@2x.png"; sourceTree = "<group>"; };
-		824A9E5D1724F02D00C9BD79 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		824A9E5E1724F02D00C9BD79 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		824A9E631724F03D00C9BD79 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		824A9E641724F03D00C9BD79 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		824A9E651724F03D00C9BD79 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -1616,8 +1608,6 @@
 				2EA3DD0618B3CBDF00DA31A5 /* IconDownloader.m */,
 				2E9BCB9D18A9A39000D61B0B /* CustomTableViewCell.h */,
 				2E9BCB9E18A9A39000D61B0B /* CustomTableViewCell.m */,
-				2E9BCB9818A921AC00D61B0B /* TPKeyboardAvoidingScrollView.h */,
-				2E9BCB9918A921AC00D61B0B /* TPKeyboardAvoidingScrollView.m */,
 				824A9E311724E2A900C9BD79 /* AppDelegate.h */,
 				824A9E321724E2A900C9BD79 /* AppDelegate.m */,
 				2E9BC43918A573B300D61B0B /* FeedsViewController.h */,
@@ -1628,8 +1618,8 @@
 				2E9BC91318A89DA000D61B0B /* FilterViewController.m */,
 				2E9BCB9518A91A8600D61B0B /* SubmitPostViewController.h */,
 				2E9BCB9618A91A8700D61B0B /* SubmitPostViewController.m */,
-				824A9E341724E45000C9BD79 /* RootViewController.h */,
-				824A9E351724E45100C9BD79 /* RootViewController.m */,
+				2E9BCB9818A921AC00D61B0B /* TPKeyboardAvoidingScrollView.h */,
+				2E9BCB9918A921AC00D61B0B /* TPKeyboardAvoidingScrollView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1637,24 +1627,11 @@
 		824A9E421724EF9800C9BD79 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				824A9E591724F01500C9BD79 /* icons */,
 				824A9E5A1724F01D00C9BD79 /* splash */,
 				824A9E401724ECC600C9BD79 /* SalesforceSDKResources.bundle */,
 				824A9E3E1724EC6300C9BD79 /* Settings.bundle */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		824A9E591724F01500C9BD79 /* icons */ = {
-			isa = PBXGroup;
-			children = (
-				2E9BCBA218AA89EF00D61B0B /* hearts-50.png */,
-				824A9E5B1724F02D00C9BD79 /* icon-72.png */,
-				824A9E5C1724F02D00C9BD79 /* icon-72@2x.png */,
-				824A9E5D1724F02D00C9BD79 /* icon.png */,
-				824A9E5E1724F02D00C9BD79 /* icon@2x.png */,
-			);
-			name = icons;
 			sourceTree = "<group>";
 		};
 		824A9E5A1724F01D00C9BD79 /* splash */ = {
@@ -1904,7 +1881,6 @@
 				2E7CC0FA18B552A00006994D /* GPUImageDirectionalNonMaximumSuppressionFilter.m in Sources */,
 				2E7CC15118B552A00006994D /* GPUImageShiTomasiFeatureDetectionFilter.m in Sources */,
 				2E9BC91418A89DA000D61B0B /* FilterViewController.m in Sources */,
-				824A9E361724E45100C9BD79 /* RootViewController.m in Sources */,
 				2E7CC12218B552A00006994D /* GPUImageLineGenerator.m in Sources */,
 				2E7CC14418B552A00006994D /* GPUImagePrewittEdgeDetectionFilter.m in Sources */,
 				2E7CC15318B552A00006994D /* GPUImageSketchFilter.m in Sources */,

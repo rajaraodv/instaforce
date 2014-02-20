@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SFRestAPI.h"
 #import "GPUImage.h"
 
 
 
 
-@interface CameraViewController : UITableViewController <SFRestDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface CameraViewController : UITableViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 

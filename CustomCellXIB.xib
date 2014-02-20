@@ -14,14 +14,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="399"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NSTexturedFullScreenBackgroundColor.png" translatesAutoresizingMaskIntoConstraints="NO" id="8jx-mI-PST">
-                        <rect key="frame" x="2" y="0.0" width="318" height="399"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="399" id="FsG-Tj-VD1"/>
-                            <constraint firstAttribute="width" constant="318" id="P5F-n4-PPm"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="99c-ij-HMd">
                         <rect key="frame" x="30" y="37" width="261" height="46"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -88,13 +80,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" red="0.73018274429999996" green="0.77220184950000004" blue="0.73022331949999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="99c-ij-HMd" firstAttribute="centerX" secondItem="Ziz-uO-hIW" secondAttribute="centerX" id="1Jy-mw-eYz"/>
-                    <constraint firstAttribute="trailing" secondItem="8jx-mI-PST" secondAttribute="trailing" id="1XG-rr-uNu"/>
                     <constraint firstItem="fwH-Mq-6Rn" firstAttribute="leading" secondItem="sYZ-sI-5m3" secondAttribute="trailing" id="1de-JG-KQa"/>
                     <constraint firstItem="99c-ij-HMd" firstAttribute="top" secondItem="Ziz-uO-hIW" secondAttribute="top" constant="37" id="3c6-Bg-0b2"/>
                     <constraint firstItem="RN6-fm-n8x" firstAttribute="top" secondItem="jUP-wa-TDA" secondAttribute="bottom" constant="11" id="6Cd-cP-2jB"/>
-                    <constraint firstItem="8jx-mI-PST" firstAttribute="top" secondItem="Ziz-uO-hIW" secondAttribute="top" id="AFw-Tm-uJE"/>
                     <constraint firstItem="B3x-ax-lkf" firstAttribute="leading" secondItem="jUP-wa-TDA" secondAttribute="trailing" constant="1" id="C57-9l-69a"/>
                     <constraint firstItem="99c-ij-HMd" firstAttribute="centerY" secondItem="sYZ-sI-5m3" secondAttribute="centerY" id="EUd-aG-c7N"/>
                     <constraint firstItem="jUP-wa-TDA" firstAttribute="top" secondItem="B3x-ax-lkf" secondAttribute="top" id="Eb8-3y-CM9"/>
@@ -116,7 +107,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="NSTexturedFullScreenBackgroundColor.png" width="256" height="256"/>
         <image name="hearts-50.png" width="50" height="50"/>
     </resources>
 </document>

@@ -35,7 +35,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-       self.modifiedImageView.image = self.modifiedImage;
+    self.modifiedImageView.image = self.modifiedImage;
 	// Do any additional setup after loading the view.
 }
 
@@ -47,7 +47,7 @@
 
 #pragma mark - buttons
 - (IBAction)cancelBtn:(id)sender {
-     [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)submitBtn:(id)sender {
@@ -60,16 +60,16 @@
     NSLog(@"Doing upload");
     
     NSData *data = UIImageJPEGRepresentation(self.modifiedImage, 0.9);
-        SFRestRequest *request = [[SFRestAPI sharedInstance] requestForUploadFile:data
-                                                        name:@"filteredFile.jpeg"
-                                                 description:@"Filtered File"
-                                                    mimeType:@"image/jpeg"];
+    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForUploadFile:data
+                                                                         name:@"filteredFile.jpeg"
+                                                                  description:@"Filtered File"
+                                                                     mimeType:@"image/jpeg"];
     
-
+    
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
-- (void)addFiledToFeedForId:(NSString *)attachmentId {
+- (void)createFeedForAttachmentId:(NSString *)attachmentId {
     //    { "attachment":
     //        {
     //            "attachmentType":"ExistingContent",
@@ -95,15 +95,18 @@
 
 #pragma mark - salesforce rest delegates
 
-- (void)request:(SFRestRequest *)request didLoadResponse:(id)dataResponse {
+- (void)request:(SFRestRequest *)request didLoadResponse:(id)dataResponse
+{
     
-   NSString* attachmentId = [dataResponse objectForKey:@"id"];
-   
+    NSString* attachmentId = [dataResponse objectForKey:@"id"];
+    
     NSRange range = [request.path rangeOfString:@"/me/feed-items"];
     
+    //Note: this request:didLoadResponse is called for both Attachment upload and create feedItem.
+    //So we need to distinguish b/w the two and take appropriate action
     if(range.location == NSNotFound) {
-        [self addFiledToFeedForId:attachmentId];
-
+        //Just uploaded image but not associated it to a feed item, so create feedItem w/ attachment.
+        [self createFeedForAttachmentId:attachmentId];
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];

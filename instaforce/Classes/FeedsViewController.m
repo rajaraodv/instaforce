@@ -41,7 +41,6 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 @property (nonatomic, strong) NSMutableDictionary* thumbnailCache;
 
 
-- (void) downloadThumbnail:(NSString*)fileId completeBlock:(ThumbnailLoadedBlock)completeBlock;
 - (void) logout;
 - (void) cancelRequests;
 - (void) showOwnedFiles;
@@ -159,20 +158,16 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 #pragma mark - SFRestAPIDelegate
 
 - (void)request:(SFRestRequest *)request didLoadResponse:(id)jsonResponse {
-    NSLog(@"%@", jsonResponse);
     
     NSArray *feedsJsonObj = jsonResponse[@"items"];
-    NSLog(@"request:didLoadResponse: #files: %d", feedsJsonObj.count);
 
     for (int i =0; i < feedsJsonObj.count; i++) {
         NSDictionary *feedObj = feedsJsonObj[i];
         if(feedObj[@"attachment"] != [NSNull null]) {
             FeedItem *feedItem = [[FeedItem alloc] initWithJsonObj:feedObj];
-            NSLog(@"%@", feedItem);
             [self.feedItems addObject:feedItem];
         }
     }
-    NSLog(@"self.feedItems count %ui", [self.feedItems count]);
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
@@ -194,48 +189,6 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
     //add your failed error handling here
 }
 
-#pragma mark - thumbnail handling
-
-/**
- * Return image from cache if available, otherwise download image from server, and then size it and cache it
- */
-- (void) getThumbnail:(NSString*) fileId completeBlock:(ThumbnailLoadedBlock)completeBlock {
-    // cache hit
-    if (self.thumbnailCache[fileId]) {
-        completeBlock(self.thumbnailCache[fileId]);
-    }
-    // cache miss
-    else {
-        [self downloadThumbnail:fileId completeBlock:^(UIImage *image) {
-//            // size it
-//            UIGraphicsBeginImageContext(CGSizeMake(720,480));
-//            [image drawInRect:CGRectMake(0, 0, image.size.width, 480)];
-//            UIImage *thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
-//            UIGraphicsEndImageContext();
-            // cache it
-           // self.thumbnailCache[fileId] = thumbnailImage;
-            // done
-           // completeBlock(thumbnailImage);
-            completeBlock(image);
-        }];
-    }
-}
-
-
-
-
-- (void) downloadThumbnail:(NSString*)fileId completeBlock:(ThumbnailLoadedBlock)completeBlock {
-    //  SFRestRequest *imageRequest = [[SFRestAPI sharedInstance] requestForFileRendition:fileId version:nil renditionType:@"THUMB720BY480" page:0];
-    SFRestRequest *imageRequest = [[SFRestAPI sharedInstance] requestForFileContents:fileId version:nil];
-    
-    [[SFRestAPI sharedInstance] sendRESTRequest:imageRequest failBlock:nil completeBlock:^(NSData *responseData) {
-        NSLog(@"downloadThumbnail:%@ completed", fileId);
-        UIImage *image = [UIImage imageWithData:responseData];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completeBlock(image);
-        });
-    }];
-}
 
 
 
@@ -266,57 +219,8 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
     cell.Owner.text =  @"";
     cell.likesCount.text = @"";
     
-	// Configure the cell to show the data.
-    FeedItem *feedItem = [self.feedItems objectAtIndex:indexPath.row];
+    [self loadImagesForOnscreenRows];
 
-    NSString *photoId = feedItem.attachmentId;
-    NSLog(@"%@", photoId);
-  //  NSInteger tag = [photoId hash];
-  
-    //if (self.tableView.dragging == NO && self.tableView.decelerating == NO) {
-        [self loadImagesForOnscreenRows];
-    //}
-
-		
-//        // Only load cached images; defer new downloads until scrolling ends
-//        if (!feedItem.ownerProfileIcon)
-//        {
-//            if (self.tableView.dragging == NO && self.tableView.decelerating == NO)
-//            {
-//                [self startIconDownload:appRecord forIndexPath:indexPath];
-//            }
-//            // if a download is deferred or in progress, return a placeholder image
-//            cell.imageView.image = [UIImage imageNamed:@"Placeholder.png"];
-//        }
-//        else
-//        {
-//            cell.imageView.image = appRecord.appIcon;
-//        }
-    
-    
-    
-//    NSDictionary *photo = obj[@"parent"][@"photo"];
-//    NSString *token = [SFRestAPI  sharedInstance].coordinator.credentials.accessToken;
-//    NSString *profilePicUrl = [NSString stringWithFormat:@"%@%@%@", [photo  objectForKey:@"smallPhotoUrl"], @"?oauth_token=", token];
-//    NSURL * imageURL = [NSURL URLWithString:profilePicUrl];
-//    NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
-//    UIImage * image = [UIImage imageWithData:imageData];
-//    cell.ownerImageView.image = image;
-    
-//	cell.textLabel.text =  obj[@"title"];
-//    cell.detailTextLabel.text = obj[@"owner"][@"name"];
-    
-    
-//    cell.tag = tag;
-//    [self getThumbnail:photoId completeBlock:^(UIImage* thumbnailImage) {
-//        // Cell are recycled - we don't want to set the image if the cell is showing a different file
-//        if (cell.tag == tag) {
-//            //cell.imageView.image = thumbnailImage;
-//            cell.Owner.text = feedItem.ownerName;
-//            cell.likesCount.text = feedItem.likesCount;
-//            cell.myImageView.image = thumbnailImage;
-//        }
-//    }];
     
 	return cell;
     
@@ -339,11 +243,9 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
             CustomTableViewCell *cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
             
             // Display the newly loaded image
-            //cell.ownerImageView.image = feedItem.ownerProfileIcon;
             feedItem.ownerPhotoImageCache = image;
             cell.ownerImageView.image = image;
-            //cell.myImageView.image = image;
-            //feedItem.photoAttachmentImage = image;
+
             
             // Remove the IconDownloader from the in progress list.
             // This will result in it being deallocated.
@@ -373,8 +275,6 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
             CustomTableViewCell *cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
             
             // Display the newly loaded image
-            //cell.ownerImageView.image = feedItem.ownerProfileIcon;
-            // cell.ownerImageView.image = image;
             feedItem.mainPhotoAttachmentCache = image;
             cell.myImageView.image = image;
             
@@ -405,17 +305,10 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
         for (NSIndexPath *indexPath in visiblePaths)
         {
             FeedItem *feedItem = [self.feedItems objectAtIndex:indexPath.row];
-            NSLog(@"***** load for indexpath: %d", indexPath.row);
             
             [self loadImageForFeedItem:feedItem forIndexPath:indexPath];
             [self loadPhotoAttachmentForFeedItem:feedItem forIndexPath:indexPath];
         }
-        
-//        if((lastIndexPath.row + 1) < [self.feedItems count]) {
-//            NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:(lastIndexPath.row + 1) inSection:1];
-//            FeedItem *feedItem = [self.feedItems objectAtIndex:(lastIndexPath.row + 1)];
-//            [self loadImageForFeedItem:feedItem forIndexPath: nextIndexPath];
-//        }
     }
 }
 
@@ -428,11 +321,8 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
     if (!feedItem.ownerPhotoImageCache)
         // Avoid the app icon download if the app already has an icon
     {
-        NSLog(@"***** ownerPhotoImageCache not found: %d", indexPath.row);
-
         [self startIconDownload:feedItem forIndexPath:indexPath];
     } else {
-        NSLog(@"***** ownerPhotoImageCache found: %d", indexPath.row);
         CustomTableViewCell *cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         cell.ownerImageView.image = feedItem.ownerPhotoImageCache;
     }
@@ -447,38 +337,12 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
     if (!feedItem.mainPhotoAttachmentCache)
         // Avoid the app icon download if the app already has an icon
     {
-        NSLog(@"***** mainPhotoAttachmentCache not found: %d", indexPath.row);
-        
         [self startAttachmentDownload:feedItem forIndexPath:indexPath];
     } else {
-        NSLog(@"***** mainPhotoAttachmentCache found: %d", indexPath.row);
         CustomTableViewCell *cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         cell.myImageView.image = feedItem.mainPhotoAttachmentCache;
     }
 }
-
-#pragma mark - UIScrollViewDelegate
-//
-//// -------------------------------------------------------------------------------
-////	scrollViewDidEndDragging:willDecelerate:
-////  Load images for all onscreen rows when scrolling is finished.
-//// -------------------------------------------------------------------------------
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-//{
-//    if (!decelerate)
-//	{
-//        [self loadImagesForOnscreenRows];
-//    }
-//}
-//
-//// -------------------------------------------------------------------------------
-////	scrollViewDidEndDecelerating:
-//// -------------------------------------------------------------------------------
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-//{
-//    [self loadImagesForOnscreenRows];
-//}
-
 
 
 @end

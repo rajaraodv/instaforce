@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.filtersArray = [[NSMutableArray alloc] initWithObjects:@"Grayscale", @"Sepia", @"Sketch", @"Pixellate", @"Color Invert", @"Toon", @"Pinch Distort", @"None", nil];
+    self.filtersArray = [[NSMutableArray alloc] initWithObjects:@"Grayscale", @"Sepia", @"Sketch", @"PolkaDot", @"Emboss", @"Color Invert", @"Toon", @"Pinch Distort", @"None", nil];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -63,18 +63,21 @@
             selectedFilter = [[GPUImageSketchFilter alloc] init];
             break;
         case 3:
-            selectedFilter = [[GPUImagePixellateFilter alloc] init];
+            selectedFilter = [[GPUImagePolkaDotFilter alloc] init];
             break;
         case 4:
-            selectedFilter = [[GPUImageColorInvertFilter alloc] init];
+            selectedFilter = [[GPUImageEmbossFilter alloc] init];
             break;
         case 5:
-            selectedFilter = [[GPUImageToonFilter alloc] init];
+            selectedFilter = [[GPUImageColorInvertFilter alloc] init];
             break;
         case 6:
-            selectedFilter = [[GPUImagePinchDistortionFilter alloc] init];
+            selectedFilter = [[GPUImageToonFilter alloc] init];
             break;
         case 7:
+            selectedFilter = [[GPUImagePinchDistortionFilter alloc] init];
+            break;
+        case 8:
             selectedFilter = [[GPUImageFilter alloc] init];
             break;
         default:

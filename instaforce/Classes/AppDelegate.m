@@ -23,7 +23,6 @@
  */
 
 #import "AppDelegate.h"
-#import "RootViewController.h"
 #import "SFAccountManager.h"
 #import "SFAuthenticationManager.h"
 #import "SFPushNotificationManager.h"

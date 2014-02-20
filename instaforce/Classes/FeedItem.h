@@ -1,3 +1,10 @@
+//
+//  FeedItem.h
+//  This class creates a simplified version of a Chatter Feed Item
+//
+//  Created by Raja Rao DV on 2/10/14.
+//  Copyright (c) 2014 Salesforce. All rights reserved.
+//
 #import <SalesforceSDKCore/SFAuthenticationManager.h>
 #import <SalesforceNativeSDK/SFRestAPI.h>
 
