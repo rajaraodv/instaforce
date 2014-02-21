@@ -17,7 +17,7 @@
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="99c-ij-HMd">
                         <rect key="frame" x="20" y="13" width="280" height="46"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.3058823645" green="0.49411767719999999" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.20544254740000001" green="0.32601243619999998" blue="0.1863599943" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" red="0.0" green="0.3830919793" blue="0.79769212369999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,7 +59,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" red="0.6717515057139003" green="0.78678501860178707" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.73018274429999996" green="0.77220184950000004" blue="0.73022331949999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="99c-ij-HMd" firstAttribute="top" secondItem="Ziz-uO-hIW" secondAttribute="top" constant="13" id="445-46-lMY"/>
                     <constraint firstItem="jUP-wa-TDA" firstAttribute="leading" secondItem="Ziz-uO-hIW" secondAttribute="leading" constant="25" id="AEl-qZ-We2"/>

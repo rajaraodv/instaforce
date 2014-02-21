@@ -15,7 +15,7 @@
 
 - (IBAction)submitBtn:(id)sender;
 
-@property(strong, nonatomic) IBOutlet UITextView *postTextView;
+@property (strong, nonatomic) IBOutlet UITextField *addPostTextField;
 
 @property(strong, nonatomic) IBOutlet UIImageView *modifiedImageView;
 

@@ -73,7 +73,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
-                                                <color key="backgroundColor" red="0.3058823645" green="0.49411767719999999" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="backgroundColor" red="0.20544254740000001" green="0.32601243619999998" blue="0.1863599943" alpha="1" colorSpace="calibratedRGB"/>
                                             </tableViewCell>
                                         </prototypes>
                                         <sections/>
@@ -83,12 +83,12 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAz-PT-h3g">
                                 <rect key="frame" x="0.0" y="16" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" red="0.3058823645" green="0.49411767719999999" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="barTintColor" red="0.20544254740000001" green="0.32601243619999998" blue="0.1863599943" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.60227395530000005" green="0.95573580989999996" blue="0.54633167429999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="SELECT FILTER" id="yM5-AJ-XCo">
+                                    <navigationItem title="Select Filter" id="yM5-AJ-XCo">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="tBY-x0-kAi">
                                             <connections>
                                                 <action selector="cancelBtn:" destination="DMB-db-Q8u" id="2LO-a4-8cC"/>
@@ -103,7 +103,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.67175150569999997" green="0.78678501860000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Filter" id="RsZ-fI-DoS">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="MHn-zr-Faf"/>
@@ -135,33 +135,50 @@
                                 <rect key="frame" x="0.0" y="61" width="320" height="507"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Eq-aF-5Ao">
-                                        <rect key="frame" x="36" y="14" width="249" height="310"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1A-9s-SYa">
+                                        <rect key="frame" x="20" y="317" width="280" height="80"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" red="0.67175150569999997" green="0.78678501860000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </imageView>
-                                    <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="ADD POST TEXT.." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bKr-Ty-DEd">
-                                        <rect key="frame" x="36" y="332" width="249" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" red="0.0" green="0.48025042239999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="textColor" red="0.3058823645" green="0.49411767719999999" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="9k8-hv-BiM"/>
+                                            <constraint firstAttribute="width" constant="280" id="oS4-Yz-04k"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="5Eq-aF-5Ao">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="310"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="9FP-D5-dd4"/>
+                                            <constraint firstAttribute="height" constant="310" id="ePG-7m-eM2"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="5Eq-aF-5Ao" secondAttribute="trailing" id="3qj-EX-6n9"/>
+                                    <constraint firstAttribute="trailing" secondItem="v1A-9s-SYa" secondAttribute="trailing" constant="20" id="7Y1-cz-a6a"/>
+                                    <constraint firstItem="5Eq-aF-5Ao" firstAttribute="leading" secondItem="hFu-Gc-34D" secondAttribute="leading" id="Mww-ze-1DD"/>
+                                    <constraint firstItem="v1A-9s-SYa" firstAttribute="top" secondItem="5Eq-aF-5Ao" secondAttribute="bottom" constant="7" id="V8E-0A-tL7"/>
+                                    <constraint firstAttribute="bottom" secondItem="v1A-9s-SYa" secondAttribute="bottom" priority="1" constant="4" id="VhI-L3-c2c"/>
+                                    <constraint firstItem="v1A-9s-SYa" firstAttribute="leading" secondItem="hFu-Gc-34D" secondAttribute="leading" constant="20" id="YlZ-yh-M5r"/>
+                                    <constraint firstItem="5Eq-aF-5Ao" firstAttribute="top" secondItem="hFu-Gc-34D" secondAttribute="top" id="e20-pA-s5B"/>
+                                    <constraint firstItem="v1A-9s-SYa" firstAttribute="top" secondItem="5Eq-aF-5Ao" secondAttribute="bottom" constant="7" id="jPA-6C-n9q"/>
+                                    <constraint firstItem="5Eq-aF-5Ao" firstAttribute="top" secondItem="hFu-Gc-34D" secondAttribute="top" id="jn1-59-DlA"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="v1A-9s-SYa" secondAttribute="bottom" constant="4" id="w0F-nx-91j"/>
+                                </constraints>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0I-8r-IG8">
                                 <rect key="frame" x="0.0" y="17" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.20544254740000001" green="0.32601243619999998" blue="0.1863599943" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.3058823645" green="0.49411767719999999" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="barTintColor" red="0.20544254740000001" green="0.32601243619999998" blue="0.1863599943" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="textShadowColor" red="0.3058823645" green="0.49411767719999999" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="textColor" red="0.60227395530000005" green="0.95573580989999996" blue="0.54633167429999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textShadowColor" red="0.20544254740000001" green="0.32601243619999998" blue="0.1863599943" alpha="1" colorSpace="calibratedRGB"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="ADD POST TEXT" id="3IU-dU-xVY">
+                                    <navigationItem title="Add Some Text" id="3IU-dU-xVY">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="0Yq-wf-sDn">
                                             <connections>
                                                 <action selector="cancelBtn:" destination="UiJ-0Z-qId" id="R6L-f8-bN3"/>
@@ -176,21 +193,21 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.67175150569999997" green="0.78678501860000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hFu-Gc-34D" firstAttribute="leading" secondItem="48K-aK-TOB" secondAttribute="leading" id="GA4-Em-AGH"/>
-                            <constraint firstAttribute="trailing" secondItem="hFu-Gc-34D" secondAttribute="trailing" id="LHS-iR-OKY"/>
-                            <constraint firstItem="hFu-Gc-34D" firstAttribute="top" secondItem="48K-aK-TOB" secondAttribute="top" constant="61" id="PAx-WD-N7x"/>
-                            <constraint firstItem="hFu-Gc-34D" firstAttribute="top" secondItem="T0I-8r-IG8" secondAttribute="bottom" id="hwY-qn-ia3"/>
-                            <constraint firstItem="hFu-Gc-34D" firstAttribute="trailing" secondItem="T0I-8r-IG8" secondAttribute="trailing" id="iJu-37-ZOS"/>
-                            <constraint firstItem="hFu-Gc-34D" firstAttribute="leading" secondItem="T0I-8r-IG8" secondAttribute="leading" id="szy-Pz-Lp6"/>
-                            <constraint firstAttribute="bottom" secondItem="hFu-Gc-34D" secondAttribute="bottom" id="vvv-aJ-ogr"/>
+                            <constraint firstAttribute="trailing" secondItem="T0I-8r-IG8" secondAttribute="trailing" id="0Rf-Sp-xAb"/>
+                            <constraint firstItem="T0I-8r-IG8" firstAttribute="top" secondItem="48K-aK-TOB" secondAttribute="top" constant="17" id="4zk-aw-fgt"/>
+                            <constraint firstItem="hFu-Gc-34D" firstAttribute="leading" secondItem="48K-aK-TOB" secondAttribute="leading" id="Qy0-FX-ESs"/>
+                            <constraint firstItem="Ibg-vp-aVR" firstAttribute="top" secondItem="hFu-Gc-34D" secondAttribute="bottom" id="atS-Cs-Kgb"/>
+                            <constraint firstAttribute="trailing" secondItem="hFu-Gc-34D" secondAttribute="trailing" id="b46-H4-ex4"/>
+                            <constraint firstItem="T0I-8r-IG8" firstAttribute="leading" secondItem="48K-aK-TOB" secondAttribute="leading" id="g6a-eh-m2N"/>
+                            <constraint firstItem="hFu-Gc-34D" firstAttribute="top" secondItem="T0I-8r-IG8" secondAttribute="bottom" id="qxt-zV-5mS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="22P-VR-p9q"/>
                     <connections>
-                        <outlet property="addPostTextField" destination="bKr-Ty-DEd" id="dsp-ds-bty"/>
                         <outlet property="modifiedImageView" destination="5Eq-aF-5Ao" id="PP0-GK-mXW"/>
+                        <outlet property="postTextView" destination="v1A-9s-SYa" id="o9f-50-X8H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="as0-ph-y4y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -206,7 +223,7 @@
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.3058823645" green="0.49411767719999999" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="barTintColor" red="0.20957249829999999" green="0.28774713010000003" blue="0.1884598099" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="vqZ-Rp-Y9e" kind="relationship" relationship="viewControllers" id="yzL-gX-KqS"/>
@@ -249,9 +266,9 @@
                     <navigationBar key="navigationBar" userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="eav-gK-74K">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.30588236451148987" green="0.49411767721176147" blue="0.76078438758850098" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="barTintColor" red="0.20957249829999999" green="0.28774713010000003" blue="0.1884598099" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.60227395530000005" green="0.95573580989999996" blue="0.54633167429999996" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -265,10 +282,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Default.png" width="320" height="480"/>
         <image name="group-32.png" width="32" height="32"/>
         <image name="slr_camera2-32.png" width="32" height="32"/>
     </resources>
-    <color key="tintColor" red="0.78806841592525023" green="0.96777586377228975" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="0.60227395530000005" green="0.95573580989999996" blue="0.54633167429999996" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

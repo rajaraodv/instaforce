@@ -28,6 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.addPostTextField.layer.masksToBounds=YES;
+    self.addPostTextField.layer.borderColor=[[UIColor grayColor]CGColor];
+    self.addPostTextField.layer.borderWidth= 1.0f;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
