@@ -55,7 +55,7 @@
 
     NSLog(@"Doing upload");
 
-    NSData *data = UIImageJPEGRepresentation(self.modifiedImage, 0.9);
+    NSData *data = UIImageJPEGRepresentation(self.modifiedImage, 0.5);
     SFRestRequest *request = [[SFRestAPI sharedInstance] requestForUploadFile:data
                                                                          name:@"filteredFile.jpeg"
                                                                   description:@"Filtered File"

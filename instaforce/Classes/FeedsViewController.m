@@ -44,7 +44,7 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 
 - (void)cancelRequests;
 
-- (void)showOwnedFiles;
+- (void)loadFeedItemsFromChatter;
 
 - (void)showGroupsFiles;
 
@@ -96,27 +96,19 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomCellXIB"
                                                bundle:[NSBundle mainBundle]]
          forCellReuseIdentifier:@"customTableCellSBID"];
+    
+    
+    self.feedItems = [[NSMutableArray alloc] init];
 
 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //register main table view's xib file
-    [self.tableView registerNib:[UINib nibWithNibName:@"CustomCellXIB"
-                                               bundle:[NSBundle mainBundle]]
-         forCellReuseIdentifier:@"customTableCellSBID"];
 
-    self.feedItems = [[NSMutableArray alloc] init];
-    [self showOwnedFiles];
+    [self loadFeedItemsFromChatter];
 }
 
-//- (void)loadView {
-//    [super loadView];
-//    self.thumbnailCache = [NSMutableDictionary dictionary];
-//   // self.title = @"FileExplorer";
-//    [self showOwnedFiles];
-//}
 
 #pragma mark - Button handlers
 
@@ -128,7 +120,7 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     [[SFRestAPI sharedInstance] cancelAllRequests];
 }
 
-- (void)showOwnedFiles {
+- (void)loadFeedItemsFromChatter {
 
 
     SFRestAPI *api = [SFRestAPI sharedInstance];
