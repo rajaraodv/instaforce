@@ -9,18 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "GPUImage.h"
 
-@interface FilterViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface FilterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property(strong, nonatomic) IBOutlet UIImageView *imageView;
 
-@property (strong, nonatomic) UIImage * originalImage;
+@property(strong, nonatomic) UIImage *originalImage;
 
-@property (atomic,strong) UIImage* modifiedImage;
+@property(atomic, strong) UIImage *modifiedImage;
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property(strong, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)cancelBtn:(id)sender;
 
-@property (strong, nonatomic) NSArray *filtersArray;
+@property(strong, nonatomic) NSArray *filtersArray;
 
 @end

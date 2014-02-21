@@ -10,11 +10,9 @@
 #import "GPUImage.h"
 
 
-
-
 @interface CameraViewController : UITableViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property(nonatomic, strong) UIImagePickerController *imagePicker;
 
-@property (nonatomic, strong) UIImage *image;
+@property(nonatomic, strong) UIImage *image;
 @end

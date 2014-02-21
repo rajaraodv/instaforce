@@ -10,13 +10,13 @@
 #import "SFRestAPI.h"
 #import "CustomTableViewCell.h"
 
-@interface FeedsViewController : UITableViewController<SFRestDelegate> {
+@interface FeedsViewController : UITableViewController <SFRestDelegate> {
 
     NSMutableArray *dataRows;
     IBOutlet UITableView *tableView;
 
 }
-@property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) NSMutableArray *feedItems;
+@property(nonatomic, strong) NSString *token;
+@property(nonatomic, strong) NSMutableArray *feedItems;
 
 @end

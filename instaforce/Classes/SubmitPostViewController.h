@@ -9,16 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "SFRestAPI.h"
 
-@interface SubmitPostViewController : UIViewController<SFRestDelegate>
+@interface SubmitPostViewController : UIViewController <SFRestDelegate>
 
 - (IBAction)cancelBtn:(id)sender;
 
 - (IBAction)submitBtn:(id)sender;
 
-@property (strong, nonatomic) IBOutlet UITextView *postTextView;
+@property(strong, nonatomic) IBOutlet UITextView *postTextView;
 
-@property (strong, nonatomic) IBOutlet UIImageView *modifiedImageView;
+@property(strong, nonatomic) IBOutlet UIImageView *modifiedImageView;
 
-@property (strong, nonatomic) UIImage* modifiedImage;
+@property(strong, nonatomic) UIImage *modifiedImage;
 
 @end

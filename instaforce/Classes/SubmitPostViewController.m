@@ -17,8 +17,7 @@
 
 @implementation SubmitPostViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -26,21 +25,18 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.modifiedImageView.image = self.modifiedImage;
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -55,17 +51,17 @@
 }
 
 #pragma mark - salesforce
-- (void) uploadImageToSalesforce {
-    
+- (void)uploadImageToSalesforce {
+
     NSLog(@"Doing upload");
-    
+
     NSData *data = UIImageJPEGRepresentation(self.modifiedImage, 0.9);
     SFRestRequest *request = [[SFRestAPI sharedInstance] requestForUploadFile:data
                                                                          name:@"filteredFile.jpeg"
                                                                   description:@"Filtered File"
                                                                      mimeType:@"image/jpeg"];
-    
-    
+
+
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
@@ -76,35 +72,34 @@
     //            "contentDocumentId": "069i00000017Do3AAE"
     //        }
     //    }
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"ExistingContent"  forKey:@"attachmentType"];
+    [params setObject:@"ExistingContent" forKey:@"attachmentType"];
     [params setObject:attachmentId forKey:@"contentDocumentId"];
-    
+
     NSMutableDictionary *jsonObj = [NSMutableDictionary dictionary];
     [jsonObj setObject:params forKey:@"attachment"];
-    
+
     SFRestAPI *api = [SFRestAPI sharedInstance];
-    
-    
-    NSString *path =  [NSString stringWithFormat:@"/%@/chatter/feeds/user-profile/me/feed-items", [api apiVersion]];
-    
-    SFRestRequest* request =  [SFRestRequest requestWithMethod:SFRestMethodPOST path:path queryParams:jsonObj];
+
+
+    NSString *path = [NSString stringWithFormat:@"/%@/chatter/feeds/user-profile/me/feed-items", [api apiVersion]];
+
+    SFRestRequest *request = [SFRestRequest requestWithMethod:SFRestMethodPOST path:path queryParams:jsonObj];
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
 #pragma mark - salesforce rest delegates
 
-- (void)request:(SFRestRequest *)request didLoadResponse:(id)dataResponse
-{
-    
-    NSString* attachmentId = [dataResponse objectForKey:@"id"];
-    
+- (void)request:(SFRestRequest *)request didLoadResponse:(id)dataResponse {
+
+    NSString *attachmentId = [dataResponse objectForKey:@"id"];
+
     NSRange range = [request.path rangeOfString:@"/me/feed-items"];
-    
+
     //Note: this request:didLoadResponse is called for both Attachment upload and create feedItem.
     //So we need to distinguish b/w the two and take appropriate action
-    if(range.location == NSNotFound) {
+    if (range.location == NSNotFound) {
         //Just uploaded image but not associated it to a feed item, so create feedItem w/ attachment.
         [self createFeedForAttachmentId:attachmentId];
     } else {
@@ -114,7 +109,7 @@
     }
 }
 
-- (void)request:(SFRestRequest*)request didFailLoadWithError:(NSError*)error {
+- (void)request:(SFRestRequest *)request didFailLoadWithError:(NSError *)error {
     NSLog(@"request:didFailLoadWithError: %@", error);
     //add your failed error handling here
 }

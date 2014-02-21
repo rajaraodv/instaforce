@@ -254,7 +254,7 @@
 		2E3B16F218B67AB90096F138 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2E3B16F318B67AB90096F138 /* icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-76.png"; sourceTree = "<group>"; };
 		2E3B16FA18B67B1C0096F138 /* icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72@2x.png"; sourceTree = "<group>"; };
-		2E9BC42D18A4F6D600D61B0B /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = instaforce/Classes/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		2E9BC42D18A4F6D600D61B0B /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = instaforce/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		2E9BC43618A5603800D61B0B /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		2E9BC43718A5603800D61B0B /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		2E9BC43918A573B300D61B0B /* FeedsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedsViewController.h; sourceTree = "<group>"; };
@@ -437,7 +437,7 @@
 		2E9BCB9918A921AC00D61B0B /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		2E9BCB9D18A9A39000D61B0B /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		2E9BCB9E18A9A39000D61B0B /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
-		2E9BCBA018A9A86F00D61B0B /* CustomCellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellXIB.xib; sourceTree = "<group>"; };
+		2E9BCBA018A9A86F00D61B0B /* CustomCellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCellXIB.xib; path = instaforce/CustomCellXIB.xib; sourceTree = "<group>"; };
 		2EA3DD0318B3CBDF00DA31A5 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
 		2EA3DD0418B3CBDF00DA31A5 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 		2EA3DD0518B3CBDF00DA31A5 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
@@ -1132,14 +1132,14 @@
 		824A9E301724E2A900C9BD79 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				824A9E311724E2A900C9BD79 /* AppDelegate.h */,
+				824A9E321724E2A900C9BD79 /* AppDelegate.m */,
 				2EA3DD0318B3CBDF00DA31A5 /* FeedItem.h */,
 				2EA3DD0418B3CBDF00DA31A5 /* FeedItem.m */,
 				2EA3DD0518B3CBDF00DA31A5 /* IconDownloader.h */,
 				2EA3DD0618B3CBDF00DA31A5 /* IconDownloader.m */,
 				2E9BCB9D18A9A39000D61B0B /* CustomTableViewCell.h */,
 				2E9BCB9E18A9A39000D61B0B /* CustomTableViewCell.m */,
-				824A9E311724E2A900C9BD79 /* AppDelegate.h */,
-				824A9E321724E2A900C9BD79 /* AppDelegate.m */,
 				2E9BC43918A573B300D61B0B /* FeedsViewController.h */,
 				2E9BC43A18A573B400D61B0B /* FeedsViewController.m */,
 				2E9BC43618A5603800D61B0B /* CameraViewController.h */,

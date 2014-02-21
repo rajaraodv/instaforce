@@ -9,5 +9,6 @@
 
 @interface TPKeyboardAvoidingScrollView : UIScrollView
 - (BOOL)focusNextTextField;
+
 - (void)scrollToActiveTextField;
 @end

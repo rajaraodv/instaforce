@@ -20,32 +20,35 @@
 #import <SalesforceNativeSDK/SFRestAPI+Files.h>
 #import <SalesforceNativeSDK/SFRestRequest.h>
 
-typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
+typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 
 @interface FeedsViewController () {
-    
-    
+
+
 }
 
-@property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
-@property (nonatomic, strong) NSMutableDictionary *attachmentDownloadsInProgress;
+@property(nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
+@property(nonatomic, strong) NSMutableDictionary *attachmentDownloadsInProgress;
 
 
-
-@property (nonatomic, strong) UIBarButtonItem* logoutButton;
-@property (nonatomic, strong) UIBarButtonItem* cancelRequestsButton;
-@property (nonatomic, strong) UIBarButtonItem* ownedFilesButton;
-@property (nonatomic, strong) UIBarButtonItem* sharedFilesButton;
-@property (nonatomic, strong) UIBarButtonItem* groupsFilesButton;
+@property(nonatomic, strong) UIBarButtonItem *logoutButton;
+@property(nonatomic, strong) UIBarButtonItem *cancelRequestsButton;
+@property(nonatomic, strong) UIBarButtonItem *ownedFilesButton;
+@property(nonatomic, strong) UIBarButtonItem *sharedFilesButton;
+@property(nonatomic, strong) UIBarButtonItem *groupsFilesButton;
 // very basic in-memory cache
-@property (nonatomic, strong) NSMutableDictionary* thumbnailCache;
+@property(nonatomic, strong) NSMutableDictionary *thumbnailCache;
 
 
-- (void) logout;
-- (void) cancelRequests;
-- (void) showOwnedFiles;
-- (void) showGroupsFiles;
-- (void) showSharedFiles;
+- (void)logout;
+
+- (void)cancelRequests;
+
+- (void)showOwnedFiles;
+
+- (void)showGroupsFiles;
+
+- (void)showSharedFiles;
 
 @end
 
@@ -55,24 +58,22 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 
 #pragma mark Misc
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Relinquish ownership any cached data, images, etc that aren't in use.
     // terminate all pending download connections
     NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
     [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
     [self.imageDownloadsInProgress removeAllObjects];
-    
+
     NSArray *allAttachmentDownloads = [self.attachmentDownloadsInProgress allValues];
     [allAttachmentDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
     [self.attachmentDownloadsInProgress removeAllObjects];
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     self.feedItems = nil;
     self.logoutButton = nil;
     self.cancelRequestsButton = nil;
@@ -85,27 +86,27 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 
 #pragma mark - View lifecycle
 
-- (void) viewDidLoad {
-    self.token = [SFRestAPI  sharedInstance].coordinator.credentials.accessToken;
-    
+- (void)viewDidLoad {
+    self.token = [SFRestAPI sharedInstance].coordinator.credentials.accessToken;
+
     self.thumbnailCache = [NSMutableDictionary dictionary];
     // self.title = @"FileExplorer";
-  
+
     //register main table view's xib file
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomCellXIB"
                                                bundle:[NSBundle mainBundle]]
          forCellReuseIdentifier:@"customTableCellSBID"];
-    
+
 
 }
 
-- (void) viewWillAppear:(BOOL)animated  {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //register main table view's xib file
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomCellXIB"
                                                bundle:[NSBundle mainBundle]]
          forCellReuseIdentifier:@"customTableCellSBID"];
-    
+
     self.feedItems = [[NSMutableArray alloc] init];
     [self showOwnedFiles];
 }
@@ -119,37 +120,32 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 
 #pragma mark - Button handlers
 
-- (void) logout
-{
+- (void)logout {
     [[SFAuthenticationManager sharedManager] logout];
 }
 
--(void) cancelRequests
-{
+- (void)cancelRequests {
     [[SFRestAPI sharedInstance] cancelAllRequests];
 }
 
-- (void) showOwnedFiles
-{
+- (void)showOwnedFiles {
 
-    
+
     SFRestAPI *api = [SFRestAPI sharedInstance];
-    
-    
-    NSString *path =  [NSString stringWithFormat:@"/%@/chatter/feeds/news/me/feed-items", [api apiVersion]];
-    
-    SFRestRequest* request =  [SFRestRequest requestWithMethod:SFRestMethodGET path:path queryParams:nil];
+
+
+    NSString *path = [NSString stringWithFormat:@"/%@/chatter/feeds/news/me/feed-items", [api apiVersion]];
+
+    SFRestRequest *request = [SFRestRequest requestWithMethod:SFRestMethodGET path:path queryParams:nil];
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
-- (void) showGroupsFiles
-{
+- (void)showGroupsFiles {
     SFRestRequest *request = [[SFRestAPI sharedInstance] requestForFilesInUsersGroups:nil page:0];
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
-- (void) showSharedFiles
-{
+- (void)showSharedFiles {
     SFRestRequest *request = [[SFRestAPI sharedInstance] requestForFilesSharedWithUser:nil page:0];
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
@@ -158,12 +154,13 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 #pragma mark - SFRestAPIDelegate
 
 - (void)request:(SFRestRequest *)request didLoadResponse:(id)jsonResponse {
-    
+
     NSArray *feedsJsonObj = jsonResponse[@"items"];
 
-    for (int i =0; i < feedsJsonObj.count; i++) {
+    for (int i = 0; i < feedsJsonObj.count; i++) {
         NSDictionary *feedObj = feedsJsonObj[i];
-        if(feedObj[@"attachment"] != [NSNull null]) {
+        NSDictionary *attachment = feedObj[@"attachment"];
+        if (attachment != (id)[NSNull null] && [[attachment objectForKey:@"mimeType"] isEqualToString:@"image/jpeg"]) {
             FeedItem *feedItem = [[FeedItem alloc] initWithJsonObj:feedObj];
             [self.feedItems addObject:feedItem];
         }
@@ -174,7 +171,7 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 }
 
 
-- (void)request:(SFRestRequest*)request didFailLoadWithError:(NSError*)error {
+- (void)request:(SFRestRequest *)request didFailLoadWithError:(NSError *)error {
     NSLog(@"request:didFailLoadWithError: %@", error);
     //add your failed error handling here
 }
@@ -205,25 +202,26 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView_ cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
+
+
     static NSString *CellIdentifier = @"customTableCellSBID";
-    
+
     // Dequeue or create a cell of the appropriate type.
     CustomTableViewCell *cell = [tableView_ dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
-    //remove placeholder texts set by storyboard (useful in storyboard, but not here)
-    cell.Owner.text =  @"";
-    cell.likesCount.text = @"";
-    
-    [self loadImagesForOnscreenRows];
 
+
+    FeedItem *feedItem = [self.feedItems objectAtIndex:indexPath.row];
+
+    cell.Owner.text = feedItem.ownerName;
+    cell.likesCount.text = feedItem.likesCount;
     
-	return cell;
-    
+    [self loadImageForFeedItem:feedItem forIndexPath:indexPath];
+    [self loadPhotoAttachmentForFeedItem:feedItem forIndexPath:indexPath];
+
+    return cell;
 }
 
 #pragma mark - Table cell image support
@@ -231,61 +229,57 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 // -------------------------------------------------------------------------------
 //	startIconDownload:forIndexPath:
 // -------------------------------------------------------------------------------
-- (void)startIconDownload:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath
-{
+- (void)startIconDownload:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
     IconDownloader *iconDownloader = [self.imageDownloadsInProgress objectForKey:indexPath];
-    if (iconDownloader == nil)
-    {
+    if (iconDownloader == nil) {
         iconDownloader = [[IconDownloader alloc] init];
         iconDownloader.feedItem = feedItem;
-        [iconDownloader setCompletionHandler:^(UIImage *image){
-            
-            CustomTableViewCell *cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-            
+        [iconDownloader setCompletionHandler:^(UIImage *image) {
+
+            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+
             // Display the newly loaded image
             feedItem.ownerPhotoImageCache = image;
             cell.ownerImageView.image = image;
 
-            
+
             // Remove the IconDownloader from the in progress list.
             // This will result in it being deallocated.
             [self.imageDownloadsInProgress removeObjectForKey:indexPath];
-            
+
         }];
         [self.imageDownloadsInProgress setObject:iconDownloader forKey:indexPath];
-        
+
         [iconDownloader startDownloadWithURL:feedItem.ownerProfileURLString AndToken:self.token];
     }
-    
-    
+
+
 }
 
 // -------------------------------------------------------------------------------
 //	startPhotoAttachmentDownload:forIndexPath:
 // -------------------------------------------------------------------------------
-- (void)startAttachmentDownload:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath
-{
+- (void)startAttachmentDownload:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
     IconDownloader *iconDownloader = [self.attachmentDownloadsInProgress objectForKey:indexPath];
-    if (iconDownloader == nil)
-    {
+    if (iconDownloader == nil) {
         iconDownloader = [[IconDownloader alloc] init];
         iconDownloader.feedItem = feedItem;
-        [iconDownloader setCompletionHandler:^(UIImage *image){
-            
-            CustomTableViewCell *cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-            
+        [iconDownloader setCompletionHandler:^(UIImage *image) {
+
+            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+
             // Display the newly loaded image
             feedItem.mainPhotoAttachmentCache = image;
             cell.myImageView.image = image;
-            
+
             // Remove the IconDownloader from the in progress list.
             // This will result in it being deallocated.
             [self.attachmentDownloadsInProgress removeObjectForKey:indexPath];
-            
+
         }];
         [self.attachmentDownloadsInProgress setObject:iconDownloader forKey:indexPath];
         //[iconDownloader startDownload];
-        
+
         [iconDownloader startDownloadWithURL:feedItem.photoAttachmentURLString AndToken:self.token];
     }
 }
@@ -295,52 +289,75 @@ typedef void (^ThumbnailLoadedBlock) (UIImage *thumbnailImage);
 //  This method is used in case the user scrolled into a set of cells that don't
 //  have their app icons yet.
 // -------------------------------------------------------------------------------
-- (void)loadImagesForOnscreenRows
-{
-    if ([self.feedItems count] > 0)
+//- (void)loadImagesForOnscreenRows {
+//    if ([self.feedItems count] > 0) {
+//        NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
+//        // NSIndexPath *lastIndexPath = [visiblePaths lastObject];
+//
+//        for (NSIndexPath *indexPath in visiblePaths) {
+//            FeedItem *feedItem = [self.feedItems objectAtIndex:indexPath.row];
+//
+//           // [self updateCellLabelsForFeedItem:feedItem forIndexPath:indexPath];
+//            [self loadImageForFeedItem:feedItem forIndexPath:indexPath];
+//            [self loadPhotoAttachmentForFeedItem:feedItem forIndexPath:indexPath];
+//        }
+//    }
+//}
+
+//- (void)updateCellLabelsForFeedItem:(FeedItem *)feedItem forIndexPath: (NSIndexPath *) indexPath {
+//    @try {
+//        // at times this throws NSRangeException exception
+//        CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+//        NSLog(@" setting text for row %d..", indexPath.row);
+//
+//            cell.Owner.text = feedItem.ownerName;
+//            cell.likesCount.text = feedItem.likesCount;
+//  
+//    }
+//    @catch (NSException *e) {
+//       NSLog(@"Exception trying to set image from cache: %@", e);
+//    }
+//}
+
+- (void)loadImageForFeedItem:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
+    if (feedItem == nil) {
+        return;
+    }
+
+    if (!feedItem.ownerPhotoImageCache)
+            // Avoid the app icon download if the app already has an icon
     {
-        NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
-       // NSIndexPath *lastIndexPath = [visiblePaths lastObject];
-        
-        for (NSIndexPath *indexPath in visiblePaths)
-        {
-            FeedItem *feedItem = [self.feedItems objectAtIndex:indexPath.row];
-            
-            [self loadImageForFeedItem:feedItem forIndexPath:indexPath];
-            [self loadPhotoAttachmentForFeedItem:feedItem forIndexPath:indexPath];
+        [self startIconDownload:feedItem forIndexPath:indexPath];
+    } else {
+        @try {
+            // at times this throws NSRangeException exception
+            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+            cell.ownerImageView.image = feedItem.ownerPhotoImageCache;
+        }
+        @catch (NSException *e) {
+            //ignore
+           // NSLog(@"Exception trying to set image from cache: %@", e);
         }
     }
 }
 
--(void) loadImageForFeedItem:(FeedItem *) feedItem forIndexPath:(NSIndexPath *) indexPath
-{
-    if(feedItem == nil) {
+- (void)loadPhotoAttachmentForFeedItem:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
+    if (feedItem == nil) {
         return;
     }
-    
-    if (!feedItem.ownerPhotoImageCache)
-        // Avoid the app icon download if the app already has an icon
-    {
-        [self startIconDownload:feedItem forIndexPath:indexPath];
-    } else {
-        CustomTableViewCell *cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-        cell.ownerImageView.image = feedItem.ownerPhotoImageCache;
-    }
-}
 
--(void) loadPhotoAttachmentForFeedItem:(FeedItem *) feedItem forIndexPath:(NSIndexPath *) indexPath
-{
-    if(feedItem == nil) {
-        return;
-    }
-    
     if (!feedItem.mainPhotoAttachmentCache)
-        // Avoid the app icon download if the app already has an icon
+            // Avoid the app icon download if the app already has an icon
     {
         [self startAttachmentDownload:feedItem forIndexPath:indexPath];
     } else {
-        CustomTableViewCell *cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-        cell.myImageView.image = feedItem.mainPhotoAttachmentCache;
+        @try {
+            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+            cell.myImageView.image = feedItem.mainPhotoAttachmentCache;
+        }
+        @catch (NSException *exception) {
+            //ignore
+        }
     }
 }
 
