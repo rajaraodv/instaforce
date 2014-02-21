@@ -10,6 +10,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 
 #import "FilterViewController.h"
+#import "SettingsViewController.h"
 
 
 @interface CameraViewController ()
@@ -21,7 +22,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tabBarController setSelectedIndex:0];
-
+    
     [super viewWillAppear:animated];
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
@@ -57,7 +58,6 @@
         self.image = [info objectForKey:UIImagePickerControllerOriginalImage];
 
         [self dismissViewControllerAnimated:NO completion:^{
-
             [self performSegueWithIdentifier:@"ShowFilterViewSegue" sender:self];
         }];
     }

@@ -11,6 +11,8 @@
 		2E1A0A0418B6A43200F255EC /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E1A0A0318B6A43200F255EC /* libGPUImage.a */; };
 		2E1A0A0718B70E9600F255EC /* CustomCellXIB_green.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E1A0A0518B70E9600F255EC /* CustomCellXIB_green.xib */; };
 		2E1A0A0818B70E9600F255EC /* MainStoryboard_green.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E1A0A0618B70E9600F255EC /* MainStoryboard_green.storyboard */; };
+		2E1A0A0A18B7E41D00F255EC /* settings-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1A0A0918B7E41D00F255EC /* settings-256.png */; };
+		2E1A0A0C18B7E46800F255EC /* settings-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1A0A0B18B7E46800F255EC /* settings-32.png */; };
 		2E3B16D518B6705B0096F138 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B16C618B6705B0096F138 /* Default-568h@2x.png */; };
 		2E3B16D618B6705B0096F138 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B16C718B6705B0096F138 /* Default-Landscape@2x~ipad.png */; };
 		2E3B16D718B6705B0096F138 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B16C818B6705B0096F138 /* Default-Landscape~ipad.png */; };
@@ -55,6 +57,7 @@
 		2E9BCBA118A9A86F00D61B0B /* CustomCellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9BCBA018A9A86F00D61B0B /* CustomCellXIB.xib */; };
 		2EA3DD0718B3CBDF00DA31A5 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3DD0418B3CBDF00DA31A5 /* FeedItem.m */; };
 		2EA3DD0818B3CBDF00DA31A5 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3DD0618B3CBDF00DA31A5 /* IconDownloader.m */; };
+		2EFF2D1D18B7EA1D00BC4C4B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFF2D1C18B7EA1D00BC4C4B /* SettingsViewController.m */; };
 		4F3F413517E7CA5C008B3283 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3F413417E7CA5C008B3283 /* ImageIO.framework */; };
 		824A9DD91724E16400C9BD79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DD81724E16400C9BD79 /* UIKit.framework */; };
 		824A9DDB1724E16400C9BD79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DDA1724E16400C9BD79 /* Foundation.framework */; };
@@ -241,6 +244,8 @@
 		2E1A0A0318B6A43200F255EC /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGPUImage.a; sourceTree = "<group>"; };
 		2E1A0A0518B70E9600F255EC /* CustomCellXIB_green.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomCellXIB_green.xib; path = instaforce/CustomCellXIB_green.xib; sourceTree = "<group>"; };
 		2E1A0A0618B70E9600F255EC /* MainStoryboard_green.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_green.storyboard; path = instaforce/MainStoryboard_green.storyboard; sourceTree = "<group>"; };
+		2E1A0A0918B7E41D00F255EC /* settings-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-256.png"; sourceTree = "<group>"; };
+		2E1A0A0B18B7E46800F255EC /* settings-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-32.png"; sourceTree = "<group>"; };
 		2E3B16C618B6705B0096F138 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2E3B16C718B6705B0096F138 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		2E3B16C818B6705B0096F138 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -446,6 +451,8 @@
 		2EA3DD0418B3CBDF00DA31A5 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 		2EA3DD0518B3CBDF00DA31A5 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
 		2EA3DD0618B3CBDF00DA31A5 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
+		2EFF2D1B18B7EA1D00BC4C4B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		2EFF2D1C18B7EA1D00BC4C4B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		4F3F413417E7CA5C008B3283 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		824A9DD51724E16400C9BD79 /* instaforce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instaforce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		824A9DD81724E16400C9BD79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -705,9 +712,11 @@
 			children = (
 				2E3B16C618B6705B0096F138 /* Default-568h@2x.png */,
 				2E3B16C718B6705B0096F138 /* Default-Landscape@2x~ipad.png */,
+				2E1A0A0B18B7E46800F255EC /* settings-32.png */,
 				2E1A095D18B680E600F255EC /* icon@2x.png */,
 				2E3B16C818B6705B0096F138 /* Default-Landscape~ipad.png */,
 				2E3B16C918B6705B0096F138 /* Default-Portrait@2x~ipad.png */,
+				2E1A0A0918B7E41D00F255EC /* settings-256.png */,
 				2E3B16CA18B6705B0096F138 /* Default-Portrait~ipad.png */,
 				2E3B16CB18B6705B0096F138 /* Default.png */,
 				2E3B16CC18B6705B0096F138 /* Default@2x.png */,
@@ -1138,6 +1147,8 @@
 		824A9E301724E2A900C9BD79 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2EFF2D1B18B7EA1D00BC4C4B /* SettingsViewController.h */,
+				2EFF2D1C18B7EA1D00BC4C4B /* SettingsViewController.m */,
 				824A9E311724E2A900C9BD79 /* AppDelegate.h */,
 				824A9E321724E2A900C9BD79 /* AppDelegate.m */,
 				2EA3DD0318B3CBDF00DA31A5 /* FeedItem.h */,
@@ -1235,6 +1246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E1A0A0A18B7E41D00F255EC /* settings-256.png in Resources */,
 				2E3B16F618B67AB90096F138 /* icon-120.png in Resources */,
 				2E3B16E218B6705B0096F138 /* NSTexturedFullScreenBackgroundColor.png in Resources */,
 				2E1A0A0718B70E9600F255EC /* CustomCellXIB_green.xib in Resources */,
@@ -1254,6 +1266,7 @@
 				2E9BC42E18A4F6D600D61B0B /* MainStoryboard.storyboard in Resources */,
 				2E3B16DA18B6705B0096F138 /* Default.png in Resources */,
 				2E9BC73A18A73D7900D61B0B /* README.md in Resources */,
+				2E1A0A0C18B7E46800F255EC /* settings-32.png in Resources */,
 				2E3B16DB18B6705B0096F138 /* Default@2x.png in Resources */,
 				2E3B16FB18B67B1C0096F138 /* icon-72@2x.png in Resources */,
 				2E9BC74218A73D7900D61B0B /* LICENSE in Resources */,
@@ -1282,6 +1295,7 @@
 				2E9BC43818A5603800D61B0B /* CameraViewController.m in Sources */,
 				824A9E331724E2A900C9BD79 /* AppDelegate.m in Sources */,
 				2E9BC43B18A573B400D61B0B /* FeedsViewController.m in Sources */,
+				2EFF2D1D18B7EA1D00BC4C4B /* SettingsViewController.m in Sources */,
 				2E9BC91418A89DA000D61B0B /* FilterViewController.m in Sources */,
 				2E9BCB9F18A9A39000D61B0B /* CustomTableViewCell.m in Sources */,
 			);

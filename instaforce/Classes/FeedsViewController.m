@@ -13,6 +13,7 @@
 
 #import "FeedItem.h"
 #import "IconDownloader.h"
+#import "SettingsViewController.h"
 
 
 #import <SalesforceSDKCore/SFAuthenticationManager.h>
@@ -29,6 +30,7 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 
 @property(nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
 @property(nonatomic, strong) NSMutableDictionary *attachmentDownloadsInProgress;
+@property(nonatomic, strong) NSString *selectedGroupIdFromSettings;
 
 
 @property(nonatomic, strong) UIBarButtonItem *logoutButton;
@@ -46,9 +48,6 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 
 - (void)loadFeedItemsFromChatter;
 
-- (void)showGroupsFiles;
-
-- (void)showSharedFiles;
 
 @end
 
@@ -97,15 +96,17 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
                                                bundle:[NSBundle mainBundle]]
          forCellReuseIdentifier:@"customTableCellSBID"];
     
-    
+    //allocate
     self.feedItems = [[NSMutableArray alloc] init];
-
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
+    //get group id from settings tab (index 2)
+    SettingsViewController *svc = [[self.tabBarController viewControllers] objectAtIndex: 2];
+    self.selectedGroupIdFromSettings = svc.selectedGroupId;
+    
     [self loadFeedItemsFromChatter];
 }
 
@@ -132,22 +133,19 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 
     SFRestAPI *api = [SFRestAPI sharedInstance];
 
+    NSString *path;
+    if(self.selectedGroupIdFromSettings) { //get feed from group
+       path = [NSString stringWithFormat:@"/%@/chatter/feeds/record/%@/feed-items", [api apiVersion], self.selectedGroupIdFromSettings];
+   
+    } else {// get feed from current user's main news feed (default)
+        path = [NSString stringWithFormat:@"/%@/chatter/feeds/news/me/feed-items", [api apiVersion]];
 
-    NSString *path = [NSString stringWithFormat:@"/%@/chatter/feeds/news/me/feed-items", [api apiVersion]];
+    }
 
     SFRestRequest *request = [SFRestRequest requestWithMethod:SFRestMethodGET path:path queryParams:nil];
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
-- (void)showGroupsFiles {
-    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForFilesInUsersGroups:nil page:0];
-    [[SFRestAPI sharedInstance] send:request delegate:self];
-}
-
-- (void)showSharedFiles {
-    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForFilesSharedWithUser:nil page:0];
-    [[SFRestAPI sharedInstance] send:request delegate:self];
-}
 
 
 #pragma mark - SFRestAPIDelegate
@@ -295,50 +293,5 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
         [iconDownloader startDownloadWithURL:feedItem.photoAttachmentURLString AndToken:self.token];
     }
 }
-
-
-//
-//- (void)loadImageForFeedItem:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
-//    if (feedItem == nil) {
-//        return;
-//    }
-//
-//    if (!feedItem.ownerPhotoImageCache)
-//            // Avoid the app icon download if the app already has an icon
-//    {
-//        [self startIconDownload:feedItem forIndexPath:indexPath];
-//    } else {
-//        @try {
-//            // at times this throws NSRangeException exception
-//            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-//            cell.ownerImageView.image = feedItem.ownerPhotoImageCache;
-//        }
-//        @catch (NSException *e) {
-//            //ignore
-//           // NSLog(@"Exception trying to set image from cache: %@", e);
-//        }
-//    }
-//}
-
-//- (void)loadPhotoAttachmentForFeedItem:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
-//    if (feedItem == nil) {
-//        return;
-//    }
-//
-//    if (!feedItem.mainPhotoAttachmentCache)
-//            // Avoid the app icon download if the app already has an icon
-//    {
-//        [self startAttachmentDownload:feedItem forIndexPath:indexPath];
-//    } else {
-//        @try {
-//            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-//            cell.myImageView.image = feedItem.mainPhotoAttachmentCache;
-//        }
-//        @catch (NSException *exception) {
-//            //ignore
-//        }
-//    }
-//}
-
 
 @end

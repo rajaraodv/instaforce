@@ -59,41 +59,38 @@
         case 1:
             selectedFilter = [[GPUImageSepiaFilter alloc] init];
             break;
-        case 3:
+        case 2:
             selectedFilter = [[GPUImageColorInvertFilter alloc] init];
             break;
-        case 4:
+        case 3:
             selectedFilter = [[GPUImageEmbossFilter alloc] init];
-        case 5:
+            break;
+        case 4:
             pdFilter = [[GPUImagePolkaDotFilter  alloc] init];
             pdFilter.fractionalWidthOfAPixel = 0.03f;
             pdFilter.dotScaling = 1.0f;
             selectedFilter = pdFilter;
             break;
-        case 6:
+        case 5:
             selectedFilter = [[GPUImageToonFilter alloc] init];
             break;
-        case 7:
+        case 6:
             selectedFilter = [[GPUImageHueFilter alloc] init];
             break;
-         
-        case 8:
+        case 7:
             selectedFilter = [[GPUImageStretchDistortionFilter alloc] init];
             break;
-
-        case 9:
+        case 8:
             selectedFilter = [[GPUImagePinchDistortionFilter alloc] init];
             break;
 
-        case 10:
+        case 9:
             selectedFilter = [[GPUImageSphereRefractionFilter alloc] init];
             break;
             
-        case 11:
+        case 10:
             selectedFilter = [[GPUImageFilter alloc] init];
             break;
-
-
         default:
             break;
     }

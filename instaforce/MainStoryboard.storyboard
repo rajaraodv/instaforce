@@ -35,7 +35,55 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W6H-xF-TNy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="317"/>
+            <point key="canvasLocation" x="550" y="-49"/>
+        </scene>
+        <!--Settings View Controller - Settings-->
+        <scene sceneID="UAB-R0-jJZ">
+            <objects>
+                <viewController id="BwZ-dg-CRc" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zdi-nM-2kN"/>
+                        <viewControllerLayoutGuide type="bottom" id="5yw-wg-EWv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8cN-So-fUC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GROUP FOR INSTAFORCE:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4W-Yh-HAh">
+                                <rect key="frame" x="37" y="72" width="246" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="0.3058823645" green="0.49411767719999999" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lON-o9-sqS">
+                                <rect key="frame" x="20" y="101" width="280" height="291"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupsCell" id="N7u-HX-Ybg">
+                                        <rect key="frame" x="0.0" y="22" width="280" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N7u-HX-Ybg" id="08p-Ha-lDr">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" red="0.0" green="0.48025042239999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.67175150569999997" green="0.78678501860000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings-32.png" id="nJP-YP-CYp"/>
+                    <connections>
+                        <outlet property="tableView" destination="lON-o9-sqS" id="Zyd-PO-JAb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nkn-3a-FNy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="539" y="547"/>
         </scene>
         <!--Filter View Controller - Filter-->
         <scene sceneID="ZtW-p0-wV3">
@@ -136,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D0V-Bz-dhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="317"/>
+            <point key="canvasLocation" x="1068" y="-49"/>
         </scene>
         <!--Submit Post View Controller-->
         <scene sceneID="pUi-ot-mrl">
@@ -155,12 +203,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Eq-aF-5Ao">
-                                        <rect key="frame" x="36" y="14" width="249" height="222"/>
+                                        <rect key="frame" x="20" y="14" width="280" height="320"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.67175150569999997" green="0.78678501860000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="ADD POST TEXT.." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bKr-Ty-DEd">
-                                        <rect key="frame" x="36" y="332" width="249" height="30"/>
+                                        <rect key="frame" x="25" y="342" width="275" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.0" green="0.48025042239999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -214,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="as0-ph-y4y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1349" y="317"/>
+            <point key="canvasLocation" x="1567" y="-49"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="XI3-Zd-mXf">
@@ -230,6 +278,7 @@
                     <connections>
                         <segue destination="vqZ-Rp-Y9e" kind="relationship" relationship="viewControllers" id="yzL-gX-KqS"/>
                         <segue destination="VDS-4R-Dlh" kind="relationship" relationship="viewControllers" id="Vo3-It-6AA"/>
+                        <segue destination="BwZ-dg-CRc" kind="relationship" relationship="viewControllers" id="gOC-TZ-aGs"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rm3-OY-xxy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -257,7 +306,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTb-2b-zl3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1012" y="-372"/>
+            <point key="canvasLocation" x="1068" y="-678"/>
         </scene>
         <!--Navigation Controller - Feeds-->
         <scene sceneID="IXk-Gi-Lj8">
@@ -280,11 +329,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E8n-RA-prb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="-372"/>
+            <point key="canvasLocation" x="550" y="-678"/>
         </scene>
     </scenes>
     <resources>
         <image name="group-32.png" width="32" height="32"/>
+        <image name="settings-32.png" width="32" height="32"/>
         <image name="slr_camera2-32.png" width="32" height="32"/>
     </resources>
     <color key="tintColor" red="0.78806841592525023" green="0.96777586377228975" blue="1" alpha="1" colorSpace="calibratedRGB"/>

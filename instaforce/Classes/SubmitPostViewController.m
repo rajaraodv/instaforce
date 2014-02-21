@@ -11,8 +11,10 @@
 #import "SFRestAPI+Files.h"
 #import "SFRestRequest.h"
 
-@interface SubmitPostViewController ()
+#import "SettingsViewController.h"
 
+@interface SubmitPostViewController ()
+@property (atomic, strong) NSString* selectedGroupIdFromSettings;
 @end
 
 @implementation SubmitPostViewController
@@ -35,6 +37,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    //Get tabBarController and get settings tab (index 2) and then get currently selectd group id.
+    UITabBarController *tbc = (UITabBarController *)self.presentingViewController.presentingViewController;
+    SettingsViewController *svc = [[tbc viewControllers] objectAtIndex:2];
+    self.selectedGroupIdFromSettings = svc.selectedGroupId;
+    
     self.modifiedImageView.image = self.modifiedImage;
     // Do any additional setup after loading the view.
 }
@@ -76,6 +84,7 @@
     //        }
     //    }
 
+    NSLog(@"%@", attachmentId);
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"ExistingContent" forKey:@"attachmentType"];
     [params setObject:attachmentId forKey:@"contentDocumentId"];
@@ -85,9 +94,13 @@
 
     SFRestAPI *api = [SFRestAPI sharedInstance];
 
-
-    NSString *path = [NSString stringWithFormat:@"/%@/chatter/feeds/user-profile/me/feed-items", [api apiVersion]];
-
+    NSString *path;
+    if(self.selectedGroupIdFromSettings) { // post to user selected group
+        path = [NSString stringWithFormat:@"/%@/chatter/feeds/record/%@/feed-items/", [api apiVersion],  self.selectedGroupIdFromSettings];
+    } else { // post to user's main feed
+       path = [NSString stringWithFormat:@"/%@/chatter/feeds/user-profile/me/feed-items", [api apiVersion]];
+    }
+   
     SFRestRequest *request = [SFRestRequest requestWithMethod:SFRestMethodPOST path:path queryParams:jsonObj];
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
@@ -98,7 +111,7 @@
 
     NSString *attachmentId = [dataResponse objectForKey:@"id"];
 
-    NSRange range = [request.path rangeOfString:@"/me/feed-items"];
+    NSRange range = [request.path rangeOfString:@"/feed-items"];
 
     //Note: this request:didLoadResponse is called for both Attachment upload and create feedItem.
     //So we need to distinguish b/w the two and take appropriate action
