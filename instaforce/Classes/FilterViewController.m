@@ -7,6 +7,8 @@
 //
 
 #import "FilterViewController.h"
+#import "GPUImagePolkaDotFilter.h"
+
 
 @interface FilterViewController ()
 
@@ -24,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.filtersArray = [[NSMutableArray alloc] initWithObjects:@"Grayscale", @"Sepia", @"Sketch", @"PolkaDot", @"Emboss", @"Color Invert", @"Toon", @"Pinch Distort", @"None", nil];
+    self.filtersArray = [[NSMutableArray alloc] initWithObjects:@"Gray", @"Sepia", @"Color Invert", @"Emboss", @"Polka Dot",  @"Toon", @"Hue", @"Stretch", @"Pinch", @"Sphear", @"None", nil];
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -47,6 +49,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     GPUImageFilter *selectedFilter;
 
+    GPUImagePolkaDotFilter *pdFilter;
+
+
     switch ((int) indexPath.row) {
         case 0:
             selectedFilter = [[GPUImageGrayscaleFilter alloc] init];
@@ -54,27 +59,41 @@
         case 1:
             selectedFilter = [[GPUImageSepiaFilter alloc] init];
             break;
-        case 2:
-            selectedFilter = [[GPUImageSketchFilter alloc] init];
-            break;
         case 3:
-            selectedFilter = [[GPUImagePolkaDotFilter alloc] init];
+            selectedFilter = [[GPUImageColorInvertFilter alloc] init];
             break;
         case 4:
             selectedFilter = [[GPUImageEmbossFilter alloc] init];
-            break;
         case 5:
-            selectedFilter = [[GPUImageColorInvertFilter alloc] init];
+            pdFilter = [[GPUImagePolkaDotFilter  alloc] init];
+            pdFilter.fractionalWidthOfAPixel = 0.03f;
+            pdFilter.dotScaling = 1.0f;
+            selectedFilter = pdFilter;
             break;
         case 6:
             selectedFilter = [[GPUImageToonFilter alloc] init];
             break;
         case 7:
+            selectedFilter = [[GPUImageHueFilter alloc] init];
+            break;
+         
+        case 8:
+            selectedFilter = [[GPUImageStretchDistortionFilter alloc] init];
+            break;
+
+        case 9:
             selectedFilter = [[GPUImagePinchDistortionFilter alloc] init];
             break;
-        case 8:
+
+        case 10:
+            selectedFilter = [[GPUImageSphereRefractionFilter alloc] init];
+            break;
+            
+        case 11:
             selectedFilter = [[GPUImageFilter alloc] init];
             break;
+
+
         default:
             break;
     }
@@ -102,6 +121,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
     cell.textLabel.text = [self.filtersArray objectAtIndex:indexPath.row];
 
     return cell;
