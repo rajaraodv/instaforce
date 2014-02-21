@@ -19,7 +19,8 @@
     self.ownerName = jsonObj[@"parent"][@"name"];
     self.likesCount = [jsonObj[@"likes"][@"total"] description];
     self.commentsCount = [jsonObj[@"comments"][@"total"] description];
-    self.raw = jsonObj;
+    self.feedId = jsonObj[@"id"];
+   // self.raw = jsonObj;
 
     return self;
 };

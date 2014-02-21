@@ -19,6 +19,7 @@
 @property(nonatomic, strong) NSString *ownerName;
 @property(nonatomic, strong) NSString *likesCount;
 @property(nonatomic, strong) NSString *commentsCount;
+@property(nonatomic, strong) NSString *feedId;
 @property(nonatomic, strong) NSDictionary *raw;
 
 

@@ -109,6 +109,13 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     [self loadFeedItemsFromChatter];
 }
 
+//Used to scroll to top once the feed is displayed.
+//Useful to show new photo at the top after it was posted
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
+}
+
 
 #pragma mark - Button handlers
 
@@ -146,9 +153,11 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 #pragma mark - SFRestAPIDelegate
 
 - (void)request:(SFRestRequest *)request didLoadResponse:(id)jsonResponse {
+    //important to remove all feedItems before adding them back in.
+    [self.feedItems removeAllObjects];
 
+    
     NSArray *feedsJsonObj = jsonResponse[@"items"];
-
     for (int i = 0; i < feedsJsonObj.count; i++) {
         NSDictionary *feedObj = feedsJsonObj[i];
         NSDictionary *attachment = feedObj[@"attachment"];
@@ -210,8 +219,19 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     cell.Owner.text = feedItem.ownerName;
     cell.likesCount.text = feedItem.likesCount;
     
-    [self loadImageForFeedItem:feedItem forIndexPath:indexPath];
-    [self loadPhotoAttachmentForFeedItem:feedItem forIndexPath:indexPath];
+    //load or add-from-cache profile photo
+    if(feedItem.ownerPhotoImageCache) {
+        cell.ownerImageView.image = feedItem.ownerPhotoImageCache;
+    } else {
+        [self startIconDownload:feedItem forIndexPath:indexPath];
+    }
+    
+    //load or add-from-cache photo attachment
+    if(feedItem.mainPhotoAttachmentCache) {
+         cell.myImageView.image = feedItem.mainPhotoAttachmentCache;
+    } else {
+        [self startAttachmentDownload:feedItem forIndexPath:indexPath];
+    }
 
     return cell;
 }
@@ -276,82 +296,49 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     }
 }
 
-// -------------------------------------------------------------------------------
-//	loadImagesForOnscreenRows
-//  This method is used in case the user scrolled into a set of cells that don't
-//  have their app icons yet.
-// -------------------------------------------------------------------------------
-//- (void)loadImagesForOnscreenRows {
-//    if ([self.feedItems count] > 0) {
-//        NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
-//        // NSIndexPath *lastIndexPath = [visiblePaths lastObject];
+
 //
-//        for (NSIndexPath *indexPath in visiblePaths) {
-//            FeedItem *feedItem = [self.feedItems objectAtIndex:indexPath.row];
+//- (void)loadImageForFeedItem:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
+//    if (feedItem == nil) {
+//        return;
+//    }
 //
-//           // [self updateCellLabelsForFeedItem:feedItem forIndexPath:indexPath];
-//            [self loadImageForFeedItem:feedItem forIndexPath:indexPath];
-//            [self loadPhotoAttachmentForFeedItem:feedItem forIndexPath:indexPath];
+//    if (!feedItem.ownerPhotoImageCache)
+//            // Avoid the app icon download if the app already has an icon
+//    {
+//        [self startIconDownload:feedItem forIndexPath:indexPath];
+//    } else {
+//        @try {
+//            // at times this throws NSRangeException exception
+//            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+//            cell.ownerImageView.image = feedItem.ownerPhotoImageCache;
+//        }
+//        @catch (NSException *e) {
+//            //ignore
+//           // NSLog(@"Exception trying to set image from cache: %@", e);
 //        }
 //    }
 //}
 
-//- (void)updateCellLabelsForFeedItem:(FeedItem *)feedItem forIndexPath: (NSIndexPath *) indexPath {
-//    @try {
-//        // at times this throws NSRangeException exception
-//        CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-//        NSLog(@" setting text for row %d..", indexPath.row);
-//
-//            cell.Owner.text = feedItem.ownerName;
-//            cell.likesCount.text = feedItem.likesCount;
-//  
+//- (void)loadPhotoAttachmentForFeedItem:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
+//    if (feedItem == nil) {
+//        return;
 //    }
-//    @catch (NSException *e) {
-//       NSLog(@"Exception trying to set image from cache: %@", e);
+//
+//    if (!feedItem.mainPhotoAttachmentCache)
+//            // Avoid the app icon download if the app already has an icon
+//    {
+//        [self startAttachmentDownload:feedItem forIndexPath:indexPath];
+//    } else {
+//        @try {
+//            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+//            cell.myImageView.image = feedItem.mainPhotoAttachmentCache;
+//        }
+//        @catch (NSException *exception) {
+//            //ignore
+//        }
 //    }
 //}
-
-- (void)loadImageForFeedItem:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
-    if (feedItem == nil) {
-        return;
-    }
-
-    if (!feedItem.ownerPhotoImageCache)
-            // Avoid the app icon download if the app already has an icon
-    {
-        [self startIconDownload:feedItem forIndexPath:indexPath];
-    } else {
-        @try {
-            // at times this throws NSRangeException exception
-            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-            cell.ownerImageView.image = feedItem.ownerPhotoImageCache;
-        }
-        @catch (NSException *e) {
-            //ignore
-           // NSLog(@"Exception trying to set image from cache: %@", e);
-        }
-    }
-}
-
-- (void)loadPhotoAttachmentForFeedItem:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
-    if (feedItem == nil) {
-        return;
-    }
-
-    if (!feedItem.mainPhotoAttachmentCache)
-            // Avoid the app icon download if the app already has an icon
-    {
-        [self startAttachmentDownload:feedItem forIndexPath:indexPath];
-    } else {
-        @try {
-            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-            cell.myImageView.image = feedItem.mainPhotoAttachmentCache;
-        }
-        @catch (NSException *exception) {
-            //ignore
-        }
-    }
-}
 
 
 @end
