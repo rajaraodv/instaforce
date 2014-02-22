@@ -42,6 +42,11 @@
     } else {
         self.imageView.image = self.modifiedImage;
     }
+    self.imageView.alpha = 0.0;
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.imageView.alpha = 1.0;
+                     }];
 }
 
 

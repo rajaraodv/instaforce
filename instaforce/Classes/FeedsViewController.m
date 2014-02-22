@@ -227,10 +227,17 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     //load or add-from-cache photo attachment
     if(feedItem.mainPhotoAttachmentCache) {
          cell.myImageView.image = feedItem.mainPhotoAttachmentCache;
+        
+        cell.myImageView.alpha = 0.0;
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             cell.myImageView.alpha = 1.0;
+                         }];
     } else {
         [self startAttachmentDownload:feedItem forIndexPath:indexPath];
     }
-
+    
+    
     return cell;
 }
 
@@ -281,6 +288,12 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
             // Display the newly loaded image
             feedItem.mainPhotoAttachmentCache = image;
             cell.myImageView.image = image;
+            
+            cell.myImageView.alpha = 0.0;
+            [UIView animateWithDuration:0.5
+                             animations:^{
+                                 cell.myImageView.alpha = 1.0;
+                             }];
 
             // Remove the IconDownloader from the in progress list.
             // This will result in it being deallocated.

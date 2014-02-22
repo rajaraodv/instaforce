@@ -1147,8 +1147,6 @@
 		824A9E301724E2A900C9BD79 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				2EFF2D1B18B7EA1D00BC4C4B /* SettingsViewController.h */,
-				2EFF2D1C18B7EA1D00BC4C4B /* SettingsViewController.m */,
 				824A9E311724E2A900C9BD79 /* AppDelegate.h */,
 				824A9E321724E2A900C9BD79 /* AppDelegate.m */,
 				2EA3DD0318B3CBDF00DA31A5 /* FeedItem.h */,
@@ -1165,6 +1163,8 @@
 				2E9BC91318A89DA000D61B0B /* FilterViewController.m */,
 				2E9BCB9518A91A8600D61B0B /* SubmitPostViewController.h */,
 				2E9BCB9618A91A8700D61B0B /* SubmitPostViewController.m */,
+				2EFF2D1B18B7EA1D00BC4C4B /* SettingsViewController.h */,
+				2EFF2D1C18B7EA1D00BC4C4B /* SettingsViewController.m */,
 				2E9BCB9818A921AC00D61B0B /* TPKeyboardAvoidingScrollView.h */,
 				2E9BCB9918A921AC00D61B0B /* TPKeyboardAvoidingScrollView.m */,
 			);

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "instaforce/Classes/FeedsViewController.m"
-            timestampString = "414713011.814098"
+            timestampString = "414720794.448685"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "instaforce/Classes/FeedsViewController.m"
-            timestampString = "414713011.814098"
+            timestampString = "414720794.448685"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
             landmarkName = "-startAttachmentDownload:forIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "instaforce/Classes/FeedsViewController.m"
-            timestampString = "414713011.814098"
+            timestampString = "414720794.448685"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "-startAttachmentDownload:forIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "instaforce/Classes/FeedsViewController.m"
-            timestampString = "414713011.814098"
+            timestampString = "414720874.639754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-startAttachmentDownload:forIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "instaforce/Classes/FeedsViewController.m"
-            timestampString = "414713011.814098"
+            timestampString = "414720874.639754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "-startAttachmentDownload:forIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
