@@ -126,6 +126,7 @@ static NSString *const OAuthRedirectURI = @"testsfdc:///mobilesdk/detect/oauth/d
     //[[SFPushNotificationManager sharedInstance] registerForRemoteNotifications];
     //
 
+
     [[SFAuthenticationManager sharedManager] loginWithCompletion:self.initialLoginSuccessBlock failure:self.initialLoginFailureBlock];
 
     return YES;

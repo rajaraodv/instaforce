@@ -58,6 +58,7 @@
 		2EA3DD0718B3CBDF00DA31A5 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3DD0418B3CBDF00DA31A5 /* FeedItem.m */; };
 		2EA3DD0818B3CBDF00DA31A5 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3DD0618B3CBDF00DA31A5 /* IconDownloader.m */; };
 		2EFF2D1D18B7EA1D00BC4C4B /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFF2D1C18B7EA1D00BC4C4B /* SettingsViewController.m */; };
+		2EFF2D1F18BBBFCD00BC4C4B /* feedTemplate.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EFF2D1E18BBBFCD00BC4C4B /* feedTemplate.json */; };
 		4F3F413517E7CA5C008B3283 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3F413417E7CA5C008B3283 /* ImageIO.framework */; };
 		824A9DD91724E16400C9BD79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DD81724E16400C9BD79 /* UIKit.framework */; };
 		824A9DDB1724E16400C9BD79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DDA1724E16400C9BD79 /* Foundation.framework */; };
@@ -453,6 +454,7 @@
 		2EA3DD0618B3CBDF00DA31A5 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		2EFF2D1B18B7EA1D00BC4C4B /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		2EFF2D1C18B7EA1D00BC4C4B /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		2EFF2D1E18BBBFCD00BC4C4B /* feedTemplate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = feedTemplate.json; sourceTree = "<group>"; };
 		4F3F413417E7CA5C008B3283 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		824A9DD51724E16400C9BD79 /* instaforce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instaforce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		824A9DD81724E16400C9BD79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1124,6 +1126,7 @@
 		824A9DDE1724E16400C9BD79 /* instaforce */ = {
 			isa = PBXGroup;
 			children = (
+				2EFF2D1E18BBBFCD00BC4C4B /* feedTemplate.json */,
 				2E3B16C518B6705B0096F138 /* images */,
 				824A9E301724E2A900C9BD79 /* Classes */,
 				2E9BC65818A73D7800D61B0B /* Dependencies */,
@@ -1251,6 +1254,7 @@
 				2E3B16E218B6705B0096F138 /* NSTexturedFullScreenBackgroundColor.png in Resources */,
 				2E1A0A0718B70E9600F255EC /* CustomCellXIB_green.xib in Resources */,
 				824A9DE31724E16400C9BD79 /* InfoPlist.strings in Resources */,
+				2EFF2D1F18BBBFCD00BC4C4B /* feedTemplate.json in Resources */,
 				2E3B16D518B6705B0096F138 /* Default-568h@2x.png in Resources */,
 				2E1A0A0818B70E9600F255EC /* MainStoryboard_green.storyboard in Resources */,
 				824A9E3F1724EC6300C9BD79 /* Settings.bundle in Resources */,

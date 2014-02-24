@@ -211,13 +211,13 @@
                                             <constraint firstAttribute="width" constant="280" id="txM-0s-IyC"/>
                                         </constraints>
                                     </imageView>
-                                    <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="ADD POST TEXT.." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bKr-Ty-DEd">
-                                        <rect key="frame" x="23" y="243" width="277" height="31"/>
+                                    <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ADD POST TEXT.." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bKr-Ty-DEd">
+                                        <rect key="frame" x="23" y="243" width="277" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.0" green="0.48025042239999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="31" id="GYh-Bq-i1k"/>
+                                            <constraint firstAttribute="height" constant="30" id="GYh-Bq-i1k"/>
                                             <constraint firstAttribute="width" constant="277" id="hiy-cj-di6"/>
                                         </constraints>
                                         <color key="textColor" red="0.3058823645" green="0.49411767719999999" blue="0.7607843876" alpha="1" colorSpace="deviceRGB"/>
@@ -232,7 +232,7 @@
                                     <constraint firstItem="5Eq-aF-5Ao" firstAttribute="top" secondItem="hFu-Gc-34D" secondAttribute="top" constant="14" id="TI9-V1-Ksy"/>
                                     <constraint firstItem="bKr-Ty-DEd" firstAttribute="leading" secondItem="hFu-Gc-34D" secondAttribute="leading" constant="23" id="VJw-Jh-70t"/>
                                     <constraint firstAttribute="trailing" secondItem="5Eq-aF-5Ao" secondAttribute="trailing" constant="20" id="pjY-t2-tgr"/>
-                                    <constraint firstAttribute="bottom" secondItem="bKr-Ty-DEd" secondAttribute="bottom" constant="145" id="v72-va-G7k"/>
+                                    <constraint firstAttribute="bottom" secondItem="bKr-Ty-DEd" secondAttribute="bottom" constant="146" id="v72-va-G7k"/>
                                     <constraint firstItem="bKr-Ty-DEd" firstAttribute="top" secondItem="5Eq-aF-5Ao" secondAttribute="bottom" constant="8" id="ylL-Vz-dEa"/>
                                 </constraints>
                             </scrollView>

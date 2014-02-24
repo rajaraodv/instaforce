@@ -1,0 +1,14 @@
+{
+    "body": {
+        "messageSegments": [
+                            {
+                            "type": "Text",
+                            "text": "__BODY_TEXT__"
+                            }
+                            ]
+    },
+    "attachment": {
+        "attachmentType": "ExistingContent",
+        "contentDocumentId": "__ATTACHMENT_ID__"
+    }
+}

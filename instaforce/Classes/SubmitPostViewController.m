@@ -55,6 +55,7 @@
 #pragma mark - buttons
 - (IBAction)cancelBtn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (IBAction)submitBtn:(id)sender {
@@ -74,23 +75,42 @@
 
 
     [[SFRestAPI sharedInstance] send:request delegate:self];
+    
 }
 
 - (void)createFeedForAttachmentId:(NSString *)attachmentId {
-    //    { "attachment":
-    //        {
-    //            "attachmentType":"ExistingContent",
-    //            "contentDocumentId": "069i00000017Do3AAE"
-    //        }
-    //    }
-
-    NSLog(@"%@", attachmentId);
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"ExistingContent" forKey:@"attachmentType"];
-    [params setObject:attachmentId forKey:@"contentDocumentId"];
-
-    NSMutableDictionary *jsonObj = [NSMutableDictionary dictionary];
-    [jsonObj setObject:params forKey:@"attachment"];
+//Load json template from "feedTemplate.json" file as a string. Then replace __BODY_TEXT__ and __ATTACHMENT_ID__ w/
+// addPostTextField.text and attachmentId and pass that to post to chatter feed.
+//    {
+//        "body": {
+//            "messageSegments": [
+//                                {
+//                                    "type": "Text",
+//                                    "text": "__BODY_TEXT__"
+//                                }
+//                                ]
+//        },
+//        "attachment": {
+//            "attachmentType": "ExistingContent",
+//            "contentDocumentId": "__ATTACHMENT_ID__"
+//        }
+//    }
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"feedTemplate" ofType:@"json"];
+    NSError *error = nil;
+    NSData *feedJSONTemplateData = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:&error];
+    
+    
+    NSString* feedJSONTemplateStr = [[NSString alloc] initWithData:feedJSONTemplateData encoding:NSUTF8StringEncoding];
+    feedJSONTemplateStr = [feedJSONTemplateStr stringByReplacingOccurrencesOfString:@"__BODY_TEXT__" withString:self.addPostTextField.text];
+    feedJSONTemplateStr = [feedJSONTemplateStr stringByReplacingOccurrencesOfString:@"__ATTACHMENT_ID__" withString:attachmentId];
+    
+    
+    NSDictionary *jsonObj =
+    [NSJSONSerialization JSONObjectWithData: [feedJSONTemplateStr dataUsingEncoding:NSUTF8StringEncoding]
+                                    options: NSJSONReadingMutableContainers
+                                      error: &error];
+    
 
     SFRestAPI *api = [SFRestAPI sharedInstance];
 
