@@ -20,8 +20,7 @@
     self.likesCount = [jsonObj[@"likes"][@"total"] description];
     self.commentsCount = [jsonObj[@"comments"][@"total"] description];
     self.feedId = jsonObj[@"id"];
-   // self.raw = jsonObj;
-
+    self.myLike = jsonObj[@"myLike"]; //store items that i have already liked (used for like/unlike)
     return self;
 };
 

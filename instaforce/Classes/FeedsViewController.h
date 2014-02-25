@@ -10,7 +10,7 @@
 #import "SFRestAPI.h"
 #import "CustomTableViewCell.h"
 
-@interface FeedsViewController : UITableViewController <SFRestDelegate> {
+@interface FeedsViewController : UITableViewController <SFRestDelegate, LikesButtonDelegate> {
 
     NSMutableArray *dataRows;
     IBOutlet UITableView *tableView;

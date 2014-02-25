@@ -21,6 +21,7 @@
 @property(nonatomic, strong) NSString *commentsCount;
 @property(nonatomic, strong) NSString *feedId;
 @property(nonatomic, strong) NSDictionary *raw;
+@property(nonatomic, strong) NSDictionary *myLike;
 
 
 - (id)initWithJsonObj:(NSDictionary *)jsonObj;

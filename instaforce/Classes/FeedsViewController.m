@@ -33,19 +33,6 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 @property(nonatomic, strong) NSString *selectedGroupIdFromSettings;
 
 
-@property(nonatomic, strong) UIBarButtonItem *logoutButton;
-@property(nonatomic, strong) UIBarButtonItem *cancelRequestsButton;
-@property(nonatomic, strong) UIBarButtonItem *ownedFilesButton;
-@property(nonatomic, strong) UIBarButtonItem *sharedFilesButton;
-@property(nonatomic, strong) UIBarButtonItem *groupsFilesButton;
-// very basic in-memory cache
-@property(nonatomic, strong) NSMutableDictionary *thumbnailCache;
-
-
-- (void)logout;
-
-- (void)cancelRequests;
-
 - (void)loadFeedItemsFromChatter;
 
 
@@ -74,12 +61,6 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 
 - (void)dealloc {
     self.feedItems = nil;
-    self.logoutButton = nil;
-    self.cancelRequestsButton = nil;
-    self.ownedFilesButton = nil;
-    self.sharedFilesButton = nil;
-    self.groupsFilesButton = nil;
-    self.thumbnailCache = nil;
 }
 
 
@@ -88,8 +69,6 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 - (void)viewDidLoad {
     self.token = [SFRestAPI sharedInstance].coordinator.credentials.accessToken;
 
-    self.thumbnailCache = [NSMutableDictionary dictionary];
-    // self.title = @"FileExplorer";
 
     //register main table view's xib file
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomCellXIB"
@@ -118,19 +97,9 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 }
 
 
-#pragma mark - Button handlers
-
-- (void)logout {
-    [[SFAuthenticationManager sharedManager] logout];
-}
-
-- (void)cancelRequests {
-    [[SFRestAPI sharedInstance] cancelAllRequests];
-}
+#pragma mark - Chatter Related
 
 - (void)loadFeedItemsFromChatter {
-
-
     SFRestAPI *api = [SFRestAPI sharedInstance];
 
     NSString *path;
@@ -147,49 +116,12 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 }
 
 
-
-#pragma mark - SFRestAPIDelegate
-
-- (void)request:(SFRestRequest *)request didLoadResponse:(id)jsonResponse {
-    //important to remove all feedItems before adding them back in.
-    [self.feedItems removeAllObjects];
-
-    
-    NSArray *feedsJsonObj = jsonResponse[@"items"];
-    for (int i = 0; i < feedsJsonObj.count; i++) {
-        NSDictionary *feedObj = feedsJsonObj[i];
-        NSDictionary *attachment = feedObj[@"attachment"];
-        if (attachment != (id)[NSNull null] && [[attachment objectForKey:@"mimeType"] isEqualToString:@"image/jpeg"]) {
-            FeedItem *feedItem = [[FeedItem alloc] initWithJsonObj:feedObj];
-            [self.feedItems addObject:feedItem];
-        }
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
-}
-
-
-- (void)request:(SFRestRequest *)request didFailLoadWithError:(NSError *)error {
-    NSLog(@"request:didFailLoadWithError: %@", error);
-    //add your failed error handling here
-}
-
-- (void)requestDidCancelLoad:(SFRestRequest *)request {
-    NSLog(@"requestDidCancelLoad: %@", request);
-    //add your failed error handling here
-}
-
-- (void)requestDidTimeout:(SFRestRequest *)request {
-    NSLog(@"requestDidTimeout: %@", request);
-    //add your failed error handling here
-}
-
-
-
-
-
 #pragma mark - Table view data source
+
+//deselect highlighting / selection of row
+- (void)tableView:(UITableView *)tblView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tblView deselectRowAtIndexPath:indexPath animated:NO];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -202,7 +134,6 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView_ cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-
     static NSString *CellIdentifier = @"customTableCellSBID";
 
     // Dequeue or create a cell of the appropriate type.
@@ -211,11 +142,14 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
         cell = [[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
 
+    //add current controller as delegate to cell's LikesButton control
+    cell.delegate = self;
 
     FeedItem *feedItem = [self.feedItems objectAtIndex:indexPath.row];
 
     cell.Owner.text = feedItem.ownerName;
-    cell.likesCount.text = feedItem.likesCount;
+    [cell.likeBtnLabel setTitle:feedItem.likesCount forState:UIControlStateNormal];
+    
     
     //load or add-from-cache profile photo
     if(feedItem.ownerPhotoImageCache) {
@@ -236,9 +170,33 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     } else {
         [self startAttachmentDownload:feedItem forIndexPath:indexPath];
     }
-    
-    
     return cell;
+}
+
+#pragma mark - likeButtonDelegateHandler
+
+- (void) likeButtonClickedOnCell:(id)cell {
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell: cell];
+    FeedItem *feed = [self.feedItems objectAtIndex:indexPath.row];
+    if(feed.myLike  != (id)[NSNull null]) {
+        return;
+    }
+    int newLikesCount = [feed.likesCount intValue]+ 1;
+    
+    feed.likesCount = [NSString stringWithFormat:@"%d", newLikesCount];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+    
+    //na15.salesforce.com/services/data/v29.0/chatter/feed-items/0D5i000000RL7FOCA1/likes
+    
+    SFRestAPI *api = [SFRestAPI sharedInstance];
+    
+    NSString *path = [NSString stringWithFormat:@"/%@/chatter/feed-items/%@/likes", [api apiVersion], feed.feedId];
+    
+    
+    SFRestRequest *request = [SFRestRequest requestWithMethod:SFRestMethodPOST path:path queryParams:nil];
+    [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
 #pragma mark - Table cell image support
@@ -269,9 +227,8 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 
         [iconDownloader startDownloadWithURL:feedItem.ownerProfileURLString AndToken:self.token];
     }
-
-
 }
+
 
 // -------------------------------------------------------------------------------
 //	startPhotoAttachmentDownload:forIndexPath:
@@ -305,6 +262,49 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
 
         [iconDownloader startDownloadWithURL:feedItem.photoAttachmentURLString AndToken:self.token];
     }
+}
+
+#pragma mark - SFRestAPIDelegate
+
+- (void)request:(SFRestRequest *)request didLoadResponse:(id)jsonResponse {
+    
+    NSRange range = [request.path rangeOfString:@"/likes"];
+    
+    //dont do anything if it was likes
+    if (range.location == NSNotFound) {
+        
+        //important to remove all feedItems before adding them back in.
+        [self.feedItems removeAllObjects];
+        
+        NSArray *feedsJsonObj = jsonResponse[@"items"];
+        for (int i = 0; i < feedsJsonObj.count; i++) {
+            NSDictionary *feedObj = feedsJsonObj[i];
+            NSDictionary *attachment = feedObj[@"attachment"];
+            if (attachment != (id)[NSNull null] && [[attachment objectForKey:@"mimeType"] isEqualToString:@"image/jpeg"]) {
+                FeedItem *feedItem = [[FeedItem alloc] initWithJsonObj:feedObj];
+                [self.feedItems addObject:feedItem];
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }
+}
+
+
+- (void)request:(SFRestRequest *)request didFailLoadWithError:(NSError *)error {
+    NSLog(@"request:didFailLoadWithError: %@", error);
+    //add your failed error handling here
+}
+
+- (void)requestDidCancelLoad:(SFRestRequest *)request {
+    NSLog(@"requestDidCancelLoad: %@", request);
+    //add your failed error handling here
+}
+
+- (void)requestDidTimeout:(SFRestRequest *)request {
+    NSLog(@"requestDidTimeout: %@", request);
+    //add your failed error handling here
 }
 
 @end
