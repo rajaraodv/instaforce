@@ -69,8 +69,8 @@
 
     NSData *data = UIImageJPEGRepresentation(self.modifiedImage, 0.5);
     SFRestRequest *request = [[SFRestAPI sharedInstance] requestForUploadFile:data
-                                                                         name:@"filteredFile.jpeg"
-                                                                  description:@"Filtered File"
+                                                                         name:@"fileFromInstaForce.jpeg"
+                                                                  description:@"Photo From Instaforce App"
                                                                      mimeType:@"image/jpeg"];
 
 
