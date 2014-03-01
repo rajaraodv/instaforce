@@ -64,18 +64,16 @@
 
 #pragma mark - salesforce
 - (void)uploadImageToSalesforce {
-
-    NSLog(@"Doing upload");
-
+    // Make image as JPEG with 50% quality for quick upload
     NSData *data = UIImageJPEGRepresentation(self.modifiedImage, 0.5);
+    
+    // Upload image to Chatter Files w/ some default names.
     SFRestRequest *request = [[SFRestAPI sharedInstance] requestForUploadFile:data
                                                                          name:@"fileFromInstaForce.jpeg"
                                                                   description:@"Photo From Instaforce App"
                                                                      mimeType:@"image/jpeg"];
-
-
+  // Send Request
     [[SFRestAPI sharedInstance] send:request delegate:self];
-    
 }
 
 - (void)createFeedForAttachmentId:(NSString *)attachmentId {

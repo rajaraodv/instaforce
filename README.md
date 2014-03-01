@@ -57,15 +57,51 @@ Below is the `MainStoryboard.storyboard` storyboard for our app.
 Tip: If you are new, go through <a href= "https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/SecondTutorial.html">Apple's simple yet excellent tutorial</a> that shows how to build apps using storyboards.
 
 
-#### Step 3 - Create ViewControllers for each view
+#### Step 3 - Create ViewControllers for each view 
 As you are building your storyboard, create a `*ViewController.h` and `*ViewController.m ` for each views. For example, for the first tab that shows list of feed items, you may create `FeedsViewController.h` and `FeedsViewController.m` class. And associate this class in StoryBoard for that view.
 <p align="center">
   <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/associate-storyboard-to-controller-class.png" height=400px/>  
 </p>
-
+ 
 
 #### Step 4 - Register your Storyboard in AppDelegate.m file
-Remove all the `.h and .m` files that were part of sample app in your project except for `AppDelegate.h` and `AppDelegate.m` files. Register your storyboard in `setupRootViewController`
+Remove all the `.h and .m` files that were part of sample app in your project except for `AppDelegate.h` and `AppDelegate.m` files. Once the app user logs in, `setupRootViewController` method in `AppDelegate.m` is called. So register your storyboard in `setupRootViewController`method.
 <p align="center">
   <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/register-storyboard.png"/>  
 </p>
+
+#### Step 5 - Make file uploading class a SFRestAPI Delegate
+To perform any kind of interaction, we need to make that class a **delegate** of `SFRestAPI`. In our case `SubmitPostViewController.h` is the one that uploads file to Salesforce.
+
+Tip: If you are from Java or Apex, making class a delegate in Objective-C is akin to implementing an interface.
+
+<p align="center">
+  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/create-rest-api-delegate.png"/>  
+</p>
+  
+#### Step 6 - Use Salesforce iOS SDK to upload files
+Now in `SubmitPostViewController.m` file, simply use `requestForUploadFile:` api to upload our image. Note that we need to `import SFRestAPI+Files.h` file to use file related parts of the SDK.
+<p align="center">
+  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/upload-file-to-sf.png"/>  
+</p>
+  
+#### Step 7 - Associate file to chatter feed
+Uploading files simply uploads photos to `Chatter Files` repo but doesn't associate it with a Chatter feed. Thankfully, Chatter api provides a way to associate an existing file to a news created feed via `ExistingContent` parameter of . Remember we also need to grab and display post's body text
+<pre>
+//HTTP Post to an endpoint like https://na15.salesforce.com/services/data/v29.0/chatter/feeds/user-profile/me/feed-items to associate an existing attachment and add body text while also creating a Chatter feed.
+//
+//    {
+//        "body": {
+//            "messageSegments": [
+//                                {
+//                                    "type": "Text",
+//                                    "text": "Awesome picture isnt it?"
+//                                }
+//                                ]
+//        },
+//        "attachment": {
+//            "attachmentType": "ExistingContent",
+//            "contentDocumentId": "069i00000017Do3AAE"
+//        }
+//    }
+</pre>
