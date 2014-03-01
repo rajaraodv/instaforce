@@ -99,7 +99,7 @@
         default:
             break;
     }
-
+    // Apply selected filter to original image from camera and return modified image
     self.modifiedImage = [selectedFilter imageByFilteringImage:self.originalImage];
     [self.imageView setImage:self.modifiedImage];
 }

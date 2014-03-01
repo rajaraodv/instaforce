@@ -18,7 +18,7 @@
 
 #import <SalesforceSDKCore/SFAuthenticationManager.h>
 #import <SalesforceNativeSDK/SFRestAPI+Blocks.h>
-#import <SalesforceNativeSDK/SFRestAPI+Files.h>
+//#import <SalesforceNativeSDK/SFRestAPI+Files.h>
 #import <SalesforceNativeSDK/SFRestRequest.h>
 
 typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
@@ -189,7 +189,7 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
     
-    //na15.salesforce.com/services/data/v29.0/chatter/feed-items/0D5i000000RL7FOCA1/likes
+    //HTTP POST na15.salesforce.com/services/data/v29.0/chatter/feed-items/0D5i000000RL7FOCA1/likes
     
     SFRestAPI *api = [SFRestAPI sharedInstance];
     

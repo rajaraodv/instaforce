@@ -70,7 +70,24 @@ Remove all the `.h and .m` files that were part of sample app in your project ex
   <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/register-storyboard.png"/>  
 </p>
 
-#### Step 5 - Make file uploading class a SFRestAPI Delegate
+#### Step 5 - GPUImage framework for filtering images
+As mentioned earlier, our app uses open source <a src="https://github.com/BradLarson/GPUImage" target="_blank">GPUImage framework</a> for filters. Once you loaded the framework, simply import "GPUImage.h" and apply filter like below:
+<pre>
+	//FilterViewController.m
+	
+ 	//Initialize one of the filters
+ 	GPUImageFilter *selectedFilter = [[GPUImageSepiaFilter alloc] init];
+ 	
+    // Apply selected filter to original image from the camera and return modified image
+    self.modifiedImage = [selectedFilter imageByFilteringImage:self.originalImage];
+    
+    //show preview of the modified image
+    [self.imageView setImage:self.modifiedImage];
+</pre>
+
+Tip: But adding this framework could be tricky, so <a href="http://stackoverflow.com/questions/10382394/what-should-i-do-if-i-cant-find-the-gpuimage-h-header-for-the-gpuimage-framewor/21896243#21896243" target="_blank">I posted a detailed step-by-step instructions</a> on StackOverflow to help everyone.
+
+#### Step 6 - Make file uploading class a SFRestAPI Delegate
 To perform any kind of interaction, we need to make that class a **delegate** of `SFRestAPI`. In our case `SubmitPostViewController.h` is the one that uploads file to Salesforce.
 
 Tip: If you are from Java or Apex, making class a delegate in Objective-C is akin to implementing an interface.
@@ -79,13 +96,13 @@ Tip: If you are from Java or Apex, making class a delegate in Objective-C is aki
   <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/create-rest-api-delegate.png"/>  
 </p>
   
-#### Step 6 - Use Salesforce iOS SDK to upload files
+#### Step 7 - Use Salesforce iOS SDK to upload photo files
 Now in `SubmitPostViewController.m` file, simply use `requestForUploadFile:` api to upload our image. Note that we need to `import SFRestAPI+Files.h` file to use file related parts of the SDK.
 <p align="center">
   <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/upload-file-to-sf.png"/>  
 </p>
   
-#### Step 7 - Associate photo file to chatter feed
+#### Step 8 - Associate photo file to chatter feed
 Uploading photos using SDK simply uploads photos to `Chatter Files` repo but doesn't associate it with a Chatter feed. Thankfully, Chatter api provides a way to associate an existing file that's already in Chatter Files to a feed that's about to be created via `ExistingContent` parameter of `/feed-items` api. 
 <pre>
 // HTTP Post to an endpoint like https://na15.salesforce.com/services/data/v29.0/chatter/feeds/user-profile/me/feed-items 
@@ -104,10 +121,15 @@ Uploading photos using SDK simply uploads photos to `Chatter Files` repo but doe
 //            "attachmentType": "ExistingContent",
 //            "contentDocumentId": "069i00000017Do3AAE" // Existing file id
 //        }
-//    }
+//    } 
 </pre>
 Below code in `SubmitPostViewController.m` loads a JSON template and swaps body text (from 3rd tab) and attachmentId (we get this when we upload the file to chatter files repo) and posts it to Chatter.
 <p align="center">
-  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/associate-attachment-and-create-feed.png" height="200px"/>  
+  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/associate-attachment-and-create-feed.png" height="300px"/>  
 </p>
 
+#### Step 9 - Download photo files and show them in a list
+Now that we have how to upload photos, let's download them and display them in a list (in tab 1). In the demo app, this is handled by `FeedsViewController` class. Again similar to above steps, to interact with Salesforce, we will again make our `FeedsViewController.h` that lists photos a delegate of `SFRestAPI.h`. Thne open `FeedsViewController.m` and import `SFRestAPI.h, SFRestAPI+Files.h and SFRestRequest.h` to interact with Salesforce. Then call `sendRESTRequest:` with a `completeBlock` to load photos asynchronously as shown below.
+<p align="center">
+  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/file-download.png" height='300px'/>  
+</p>
