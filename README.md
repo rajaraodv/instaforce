@@ -17,8 +17,8 @@ Not only does Salesforce1 come with an excellent mBaaS platform for backend, it 
 ##InstaForce - Demo App
 Before we get started on how to build, let's see how the final app looks like. The app has 3 main tabs: 1. Photo List tab that show pictures and allows people to "Like", 2. "Apply Filter" tab that allows people to apply filters and finally, 3. Settings tab that allows people to select which "Chatter Group" photos to go to.
 <p align='center'>
-  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/main-list.png" style='width:200px'>    
-  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/filter-view-noFilter.png"  style='width:200px'></img>  
+  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/main-list.png" style="width: 200px;" />    
+  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/filter-view-noFilter.png"  style="width: 200px;"/>  
   <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/groups-view.png" style='width:200px'/>  
 
 </p>
