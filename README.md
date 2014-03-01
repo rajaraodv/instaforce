@@ -85,23 +85,29 @@ Now in `SubmitPostViewController.m` file, simply use `requestForUploadFile:` api
   <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/upload-file-to-sf.png"/>  
 </p>
   
-#### Step 7 - Associate file to chatter feed
-Uploading files simply uploads photos to `Chatter Files` repo but doesn't associate it with a Chatter feed. Thankfully, Chatter api provides a way to associate an existing file to a news created feed via `ExistingContent` parameter of . Remember we also need to grab and display post's body text
+#### Step 7 - Associate photo file to chatter feed
+Uploading photos using SDK simply uploads photos to `Chatter Files` repo but doesn't associate it with a Chatter feed. Thankfully, Chatter api provides a way to associate an existing file that's already in Chatter Files to a feed that's about to be created via `ExistingContent` parameter of `/feed-items` api. 
 <pre>
-//HTTP Post to an endpoint like https://na15.salesforce.com/services/data/v29.0/chatter/feeds/user-profile/me/feed-items to associate an existing attachment and add body text while also creating a Chatter feed.
+// HTTP Post to an endpoint like https://na15.salesforce.com/services/data/v29.0/chatter/feeds/user-profile/me/feed-items 
+// to associate an existing attachment and add body text while also creating a Chatter feed.
 //
 //    {
 //        "body": {
 //            "messageSegments": [
 //                                {
 //                                    "type": "Text",
-//                                    "text": "Awesome picture isnt it?"
+//                                    "text": "Awesome picture isnt it?" // body text
 //                                }
 //                                ]
 //        },
 //        "attachment": {
 //            "attachmentType": "ExistingContent",
-//            "contentDocumentId": "069i00000017Do3AAE"
+//            "contentDocumentId": "069i00000017Do3AAE" // Existing file id
 //        }
 //    }
 </pre>
+Below code in `SubmitPostViewController.m` loads a JSON template and swaps body text (from 3rd tab) and attachmentId (we get this when we upload the file to chatter files repo) and posts it to Chatter.
+<p align="center">
+  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/associate-attachment-and-create-feed.png" height="200px"/>  
+</p>
+
