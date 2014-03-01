@@ -180,6 +180,7 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     NSIndexPath *indexPath = [self.tableView indexPathForCell: cell];
     FeedItem *feed = [self.feedItems objectAtIndex:indexPath.row];
     if(feed.myLike  != (id)[NSNull null]) {
+        //todo add unlike code here
         return;
     }
     int newLikesCount = [feed.likesCount intValue]+ 1;
@@ -229,39 +230,37 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     }
 }
 
+// -------------------------------------------------------------------------------
+//	startAttachmentDownload:forIndexPath:
+//  Use Salesforce iOS SDK's 'requestForFileContents:' to download image files
+// -------------------------------------------------------------------------------
 
-// -------------------------------------------------------------------------------
-//	startPhotoAttachmentDownload:forIndexPath:
-// -------------------------------------------------------------------------------
 - (void)startAttachmentDownload:(FeedItem *)feedItem forIndexPath:(NSIndexPath *)indexPath {
-    IconDownloader *iconDownloader = [self.attachmentDownloadsInProgress objectForKey:indexPath];
-    if (iconDownloader == nil) {
-        iconDownloader = [[IconDownloader alloc] init];
-        iconDownloader.feedItem = feedItem;
-        [iconDownloader setCompletionHandler:^(UIImage *image) {
-
-            CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-
-            // Display the newly loaded image
+    
+    //Create image request for attachment id.
+    SFRestRequest *imageRequest = [[SFRestAPI sharedInstance] requestForFileContents:feedItem.attachmentId version:nil];
+    
+    //Load images asynchronously. 'completeBlock' is called when image data is downloaded.
+    [[SFRestAPI sharedInstance] sendRESTRequest:imageRequest failBlock:nil completeBlock:^(NSData *responseData) {
+        NSLog(@"downloadThumbnail:%@ completed", feedItem.attachmentId);
+        UIImage *image = [UIImage imageWithData:responseData];
+        CustomTableViewCell *cell = (CustomTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        //Grab main thread to display image asynchronously
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //cache loaded image
             feedItem.mainPhotoAttachmentCache = image;
+            //set image to cell
             cell.myImageView.image = image;
             
+            //animate fade in
             cell.myImageView.alpha = 0.0;
             [UIView animateWithDuration:0.5
                              animations:^{
                                  cell.myImageView.alpha = 1.0;
-                             }];
+                             }];        });
+    }];
 
-            // Remove the IconDownloader from the in progress list.
-            // This will result in it being deallocated.
-            [self.attachmentDownloadsInProgress removeObjectForKey:indexPath];
-
-        }];
-        [self.attachmentDownloadsInProgress setObject:iconDownloader forKey:indexPath];
-        //[iconDownloader startDownload];
-
-        [iconDownloader startDownloadWithURL:feedItem.photoAttachmentURLString AndToken:self.token];
-    }
 }
 
 #pragma mark - SFRestAPIDelegate

@@ -163,7 +163,6 @@ static NSString *const OAuthRedirectURI = @"testsfdc:///mobilesdk/detect/oauth/d
     //set it to 'window'
     self.window.rootViewController = vc;
 
-
 }
 
 - (void)logoutInitiated:(NSNotification *)notification {
