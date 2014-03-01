@@ -189,7 +189,7 @@ typedef void (^ThumbnailLoadedBlock)(UIImage *thumbnailImage);
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
     
-    //HTTP POST na15.salesforce.com/services/data/v29.0/chatter/feed-items/0D5i000000RL7FOCA1/likes
+    //HTTP POST to services/data/<Version>/chatter/feed-items/<FeedItemId>/likes to "Like" the feed item.
     
     SFRestAPI *api = [SFRestAPI sharedInstance];
     

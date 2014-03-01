@@ -133,3 +133,9 @@ Now that we have how to upload photos, let's download them and display them in a
 <p align="center">
   <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/file-download.png" height='300px'/>  
 </p>
+
+#### Step 10 -  "Liking" a Photo
+Now that we know how to download and list photos, let's see how to "Like" a photo. Since `FeedsViewController.m` controlls Feeds list, all we need to do is to have a method and that makes a HTTP POST to `services/data/<Version>/chatter/feed-items/<FeedItemId>/likes ` endpoint to like a feed item that contains the photo.
+<p align="center">
+  <img src="https://raw.github.com/rajaraodv/instaforce/master/images-for-git-and-blog/like-photo-code.png"/>  
+</p>
